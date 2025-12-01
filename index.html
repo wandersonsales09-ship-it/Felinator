@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>🐾 Felinator 4.3 — Simulador de Genética Felina</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-light:#F6F7FB;--card-light:#FFFFFF;--text-light:#222;--accent1-light:#6A5ACD;--accent2-light:#2DD4BF;
+  --bg-dark:#0F1115;--card-dark:#161A22;--text-dark:#E9EEF7;--accent1-dark:#7C4DFF;--accent2-dark:#2DD4BF;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;font-family:Nunito,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  background:var(--bg-light);color:var(--text-light);transition:.3s;
+}
+header{
+  display:flex;justify-content:space-between;align-items:center;
+  background:linear-gradient(90deg,var(--accent1-light),var(--accent2-light));
+  color:#fff;padding:18px 22px;font-family:Poppins;font-weight:600;
+}
+.header-right{
+  display:flex;align-items:center;gap:8px;
+}
+.container{max-width:1000px;margin:0 auto;padding:20px}
+.card{
+  background:var(--card-light);border-radius:20px;
+  box-shadow:0 8px 26px rgba(15,23,42,.15);
+  padding:20px;margin-top:16px;transition:.25s transform,.25s box-shadow;
+}
+.card:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(15,23,42,.22)}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+button,select,input{
+  border-radius:12px;border:1px solid #d1d5db;
+  padding:10px 12px;font-family:Nunito;font-size:14px;
+}
+button{
+  background:linear-gradient(90deg,var(--accent1-light),var(--accent2-light));
+  color:white;font-weight:700;border:none;cursor:pointer;transition:.2s;
+}
+button:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.mode-btn{
+  font-size:20px;width:260px;padding:14px 22px;border-radius:18px;
+}
+.center{text-align:center}
+.result-box{
+  display:flex;gap:16px;align-items:center;flex-wrap:wrap;
+  background:rgba(0,0,0,.03);border-radius:16px;padding:14px
+}
+.result-box img{
+  width:190px;height:190px;object-fit:cover;border-radius:16px
+}
+.title{font-weight:800;color:var(--accent1-light);font-size:18px;margin-bottom:6px}
+.curio{color:#555;margin-top:4px;font-size:14px}
+.professor{
+  background:rgba(0,0,0,.04);border-left:5px solid var(--accent2-light);
+  padding:10px;border-radius:10px;margin-top:10px;font-size:14px
+}
+.counter{font-weight:700;margin-top:12px}
+.theme-toggle{background:none;border:none;color:white;font-size:20px;cursor:pointer}
+
+/* Botão menu (três linhas) */
+.menu-toggle{
+  background:none;border:none;color:white;
+  font-size:24px;cursor:pointer;line-height:1;
+  padding:4px 8px;border-radius:8px;
+}
+.menu-toggle:hover{background:rgba(255,255,255,0.15);transform:none;filter:none;}
+
+.voltar{
+  margin-top:12px;background:#9ca3af;color:#000;border:none;
+  font-weight:600;padding:8px 18px;border-radius:12px;cursor:pointer;font-size:14px;
+}
+.voltar:hover{filter:brightness(0.93)}
+
+/* Botões maiores de ação (resultado / cruzar) */
+.btn-big{
+  font-size:17px;padding:12px 24px;border-radius:18px;
+}
+
+/* Caixa de alternativas (A,B,C,D) */
+.question-box{
+  margin-top:14px;padding:12px 10px;border-radius:14px;
+  background:rgba(0,0,0,.02);border:1px dashed rgba(148,163,184,.7);
+}
+.question-box p{margin:0 0 8px 0;font-weight:700;font-size:14px}
+
+.options-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+.option-btn{
+  width:100%;text-align:left;
+  display:flex;align-items:center;gap:8px;
+  padding:10px 12px;font-size:14px;border-radius:14px;
+  background:linear-gradient(90deg,#e5e7eb,#e5e7eb);
+  color:#111827;border:1px solid #d1d5db;
+}
+.option-btn .letter{
+  font-weight:800;min-width:22px;text-align:center;
+}
+.option-btn .text{flex:1}
+.option-btn.selected{
+  background:linear-gradient(120deg,var(--accent1-light),var(--accent2-light));
+  color:white;border-color:transparent;box-shadow:0 6px 18px rgba(99,102,241,.5);
+}
+
+/* Tela inicial: separar Modo Aluno e Modo Professor */
+.start-cards{
+  justify-content:center;
+}
+.start-card{
+  flex:1 1 260px;
+  max-width:380px;
+}
+
+/* ====== RECURSOS DIDÁTICOS — FRONTEND LÚDICO ====== */
+
+.prof-section-header{
+  display:flex;justify-content:space-between;align-items:flex-start;gap:12px;
+}
+.prof-section-header-title{
+  font-weight:800;font-size:16px;display:flex;align-items:center;gap:8px;
+}
+.prof-section-header-title span.icon{
+  font-size:20px;
+}
+.prof-section-header-sub{
+  font-size:13px;color:#6b7280;margin-top:4px;
+}
+.prof-chip-row{
+  display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;
+}
+.prof-chip{
+  font-size:11px;padding:3px 8px;border-radius:999px;
+  background:#eef2ff;color:#4338ca;border:1px solid #c4b5fd;
+}
+
+/* Tabs do modo professor */
+.prof-tabs-wrapper{
+  margin-top:12px;
+  padding:10px;
+  border-radius:16px;
+  background:rgba(15,23,42,.03);
+}
+.prof-tabs{
+  display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;
+}
+.prof-tab-btn{
+  padding:7px 12px;font-size:12px;border-radius:999px;border:1px solid #d1d5db;
+  background:#f3f4f6;color:#111827;font-weight:600;display:flex;align-items:center;gap:6px;
+}
+.prof-tab-btn span.emoji{font-size:15px}
+.prof-tab-btn small{
+  font-size:10px;font-weight:500;opacity:.75;
+}
+.prof-tab-btn.active{
+  background:linear-gradient(90deg,var(--accent1-light),var(--accent2-light));
+  color:#fff;border-color:transparent;box-shadow:0 4px 10px rgba(79,70,229,.45);
+}
+.prof-tab{
+  display:none;margin-top:8px;
+}
+.prof-tab.active{display:block}
+
+/* blocos internos mais lúdicos */
+.prof-block{
+  border-radius:16px;
+  padding:10px 12px;
+  margin-top:6px;
+}
+.prof-block-header{
+  display:flex;align-items:center;gap:8px;margin-bottom:4px;
+  font-weight:700;font-size:14px;
+}
+.prof-block-header span.emoji{font-size:18px}
+.prof-block-note{
+  font-size:12px;color:#6b7280;margin-top:2px;
+}
+
+/* estilos específicos */
+.punnett-wrap{
+  display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;margin-top:8px;
+}
+.punnett-grid{
+  border-collapse:collapse;
+}
+.punnett-grid th,.punnett-grid td{
+  border:1px solid #9ca3af;
+  min-width:42px;height:42px;
+  text-align:center;font-weight:600;
+}
+.punnett-grid th{
+  background:#e5e7eb;
+}
+.punnett-info{
+  font-size:13px;max-width:260px;
+}
+
+.definition-list ul{
+  margin-top:6px;padding-left:0;list-style:none;
+}
+.definition-list li{
+  display:flex;align-items:flex-start;gap:8px;
+  padding:6px 8px;border-radius:12px;
+  background:rgba(15,23,42,.03);margin-bottom:4px;font-size:13px;
+}
+.definition-badge{
+  font-weight:800;font-size:12px;
+  padding:2px 6px;border-radius:999px;
+  background:#e0e7ff;color:#3730a3;min-width:60px;text-align:center;
+}
+
+/* Tutoriais — passos colapsáveis */
+.tutorial-steps{
+  margin-top:6px;display:flex;flex-direction:column;gap:6px;
+}
+.step{
+  border-radius:14px;background:rgba(15,23,42,.03);overflow:hidden;
+}
+.step-header{
+  width:100%;text-align:left;border:none;
+  padding:8px 10px;font-size:13px;font-weight:700;
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  background:transparent;color:inherit;
+}
+.step-header-main{
+  display:flex;align-items:center;gap:8px;
+}
+.step-index{
+  width:20px;height:20px;border-radius:999px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;
+  background:#e0f2fe;color:#0369a1;
+}
+.step-toggle-icon{
+  font-size:14px;opacity:.8;
+}
+.step-body{
+  padding:6px 10px 10px 10px;font-size:13px;display:none;
+}
+.step.open .step-body{display:block}
+
+/* Exercícios */
+.exercise-item{
+  margin-bottom:10px;padding:8px;border-radius:14px;
+  background:rgba(15,23,42,.03);font-size:14px;
+}
+.exercise-answer{
+  margin-top:4px;font-size:13px;display:none;
+}
+
+/* Simulação populacional */
+.sim-row{
+  display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:6px;
+}
+.sim-output{
+  margin-top:8px;font-size:14px;
+}
+
+/* Canvas */
+.canvas-wrap{
+  margin-top:6px;
+}
+#graficoCanvas{
+  border-radius:12px;border:1px solid #d1d5db;background:#f9fafb;
+}
+
+/* ====== MENU LATERAL + PALETAS GENÉTICAS ====== */
+
+.side-panel{
+  position:fixed;
+  top:0;
+  right:0;
+  width:280px;
+  max-width:80%;
+  height:100vh;
+  background:var(--card-light);
+  box-shadow:-4px 0 18px rgba(15,23,42,.4);
+  transform:translateX(100%);
+  transition:transform .25s ease-out;
+  z-index:50;
+  display:flex;
+  flex-direction:column;
+}
+.side-panel.open{
+  transform:translateX(0);
+}
+.side-panel-header{
+  padding:16px 18px;
+  border-bottom:1px solid #e5e7eb;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.side-panel-header-title{
+  font-weight:700;
+  font-size:15px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.side-panel-close{
+  background:none;
+  border:none;
+  font-size:18px;
+  cursor:pointer;
+}
+.side-panel-content{
+  padding:16px 16px 24px 16px;
+  overflow-y:auto;
+}
+
+/* Seletor de paletas (dentro do menu) */
+.paleta-title{
+  font-size:15px;
+  font-weight:700;
+  margin-bottom:8px;
+}
+.paleta-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+}
+.paleta-card{
+  background:rgba(15,23,42,0.03);
+  border:1px solid #d1d5db;
+  border-radius:12px;
+  padding:10px;
+  cursor:pointer;
+  transition:.2s;
+}
+.paleta-card:hover{
+  background:rgba(15,23,42,0.06);
+  transform:translateY(-1px);
+}
+.paleta-nome{
+  font-size:13px;
+  font-weight:600;
+}
+.paleta-colors{
+  display:flex;
+  gap:6px;
+  margin-top:6px;
+}
+.color-dot{
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  border:1px solid rgba(0,0,0,0.35);
+}
+
+/* Dark mode */
+body.dark{background:var(--bg-dark);color:var(--text-dark)}
+body.dark header{background:linear-gradient(90deg,var(--accent1-dark),var(--accent2-dark))}
+body.dark .card{background:var(--card-dark);box-shadow:0 8px 26px rgba(0,0,0,.55)}
+body.dark .title{color:var(--accent1-dark)}
+body.dark .curio{color:var(--text-dark)}
+body.dark .professor{background:#131823;border-left:5px solid var(--accent2-dark)}
+body.dark button{background:linear-gradient(90deg,var(--accent1-dark),var(--accent2-dark))}
+body.dark .result-box{background:#0f141f}
+body.dark .voltar{background:#374151;color:#e5e7eb}
+body.dark .question-box{background:#111827;border-color:#1f2937}
+body.dark .option-btn{
+  background:#1f2937;color:#e5e7eb;border-color:#374151;
+}
+body.dark .option-btn.selected{
+  background:linear-gradient(120deg,var(--accent1-dark),var(--accent2-dark));
+  box-shadow:0 6px 18px rgba(79,70,229,.7);
+}
+body.dark .prof-tabs-wrapper{background:#020617}
+body.dark .prof-tab-btn{background:#111827;color:#e5e7eb;border-color:#4b5563}
+body.dark .prof-tab-btn.active{border-color:transparent}
+body.dark .punnett-grid th{background:#111827}
+body.dark #graficoCanvas{background:#020617;border-color:#1f2937}
+body.dark .exercise-item,
+body.dark .step,
+body.dark .definition-list li{background:#111827}
+body.dark .step-index{background:#0ea5e9;color:#e0f2fe}
+body.dark .question-box{border-style:solid}
+body.dark .prof-chip{background:#312e81;color:#e0e7ff;border-color:#4c1d95}
+body.dark .side-panel{background:var(--card-dark);}
+body.dark .side-panel-header{border-bottom:1px solid #1f2937;}
+body.dark .paleta-card{background:#111827;border-color:#374151;}
+body.dark .paleta-card:hover{background:#020617;}
+body.dark .color-dot{border-color:rgba(0,0,0,0.6);}
+
+/* Responsividade básica */
+@media (max-width: 640px){
+  header{flex-direction:row;align-items:center;gap:8px;justify-content:space-between;}
+  .mode-btn{width:100%}
+  .result-box{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+<header>
+  <span id="headerTitle">🐾 Felinator — Simulador de Genética Felina</span>
+  <div class="header-right">
+    <button id="themeToggle" class="theme-toggle" title="Alternar tema" type="button">🌙</button>
+    <button id="menuToggle" class="menu-toggle" title="Menu" type="button">☰</button>
+  </div>
+</header>
+
+<!-- Painel lateral com seletor de paletas -->
+<div id="sidePanel" class="side-panel">
+  <div class="side-panel-header">
+    <div class="side-panel-header-title">
+      <span>🎨</span><span>Paletas genéticas</span>
+    </div>
+    <button class="side-panel-close" id="closePanel" type="button">✕</button>
+  </div>
+  <div class="side-panel-content">
+    <h3 class="paleta-title">Escolha a paleta de cores</h3>
+    <p style="font-size:12px;margin:0 0 10px 0;color:#6b7280;">
+      As paletas são inspiradas em fenótipos reais: melanina, tabby, siamês, tricolor, van e cores de olhos.
+    </p>
+    <div class="paleta-grid" id="paletaGrid"></div>
+  </div>
+</div>
+
+<!-- Tela inicial com cards separados -->
+<div class="container" id="inicio">
+  <div class="row start-cards">
+    <!-- Card Modo Aluno -->
+    <div class="card center start-card">
+      <h2>👨‍🎓 Modo Aluno</h2>
+      <p>Treine cruzamentos de gatos, escolha a alternativa correta (A, B, C ou D) e veja se acertou.</p>
+      <button class="mode-btn" id="btnAluno" type="button">Entrar no Modo Aluno</button>
+    </div>
+    <!-- Card Modo Professor -->
+    <div class="card center start-card">
+      <h2>👩‍🏫 Modo Professor</h2>
+      <p>Acesse recursos extras, visualize explicações completas e use o Felinator em sala.</p>
+      <button class="mode-btn" id="btnProfessor" type="button">Entrar no Modo Professor</button>
+    </div>
+  </div>
+</div>
+
+<!-- Tela de autenticação do professor -->
+<div class="container" id="authProf" style="display:none">
+  <div class="card center">
+    <h3>🔐 Verificação de Professor</h3>
+    <p>Use seu e-mail (institucional <strong>ou</strong> pessoal) e o código de acesso.</p>
+
+    <input type="email" id="emailProf"
+           placeholder="Ex: nome@universidade.edu.br ou nome@gmail.com"
+           style="width:80%;max-width:320px;display:block;margin:0 auto 8px auto">
+
+    <input type="password" id="senhaProf"
+           placeholder="Código (ex: MIAU-2025 ou código do dia)"
+           style="width:80%;max-width:320px;display:block;margin:0 auto">
+
+    <div style="margin-top:10px">
+      <button id="entrarProf" class="btn-big" type="button">Entrar</button>
+      <button id="gerarCodigo" type="button">Gerar código do dia</button>
+      <button class="voltar" id="voltarAuth" type="button">⬅️ Voltar</button>
+    </div>
+    <p id="erroAuth" style="color:#ef4444;margin-top:10px;display:none"></p>
+    <p id="hintEmail" style="font-size:12px;color:#6b7280;margin-top:4px">
+      Recomendado usar e-mail institucional quando possível (ex: @ufx.edu.br, @ifx.edu.br), mas qualquer e-mail válido é aceito.
+    </p>
+  </div>
+</div>
+
+<!-- Modo Aluno -->
+<div class="container" id="modoAluno" style="display:none">
+  <div class="card">
+    <div class="row" style="justify-content:space-between">
+      <div class="row">
+        <div>
+          <div>Tipo de pelagem do Gato A</div>
+          <select id="tipoAAluno"></select>
+        </div>
+        <div>
+          <div>Tipo de pelagem do Gato B</div>
+          <select id="tipoBAluno"></select>
+        </div>
+      </div>
+      <div class="row">
+        <button id="btnSorteAluno" type="button">Surpreenda-me 🎲</button>
+      </div>
+    </div>
+
+    <!-- Alternativas A, B, C, D -->
+    <div class="question-box" aria-live="polite">
+      <p>Escolha o tipo de filhote (A, B, C ou D):</p>
+      <div id="opcoesAluno" class="options-grid">
+        <!-- opções criadas via JavaScript -->
+      </div>
+    </div>
+
+    <div class="row" style="justify-content:flex-end;margin-top:12px">
+      <button id="btnResultadoAluno" class="btn-big" type="button">Ver Resultado ✅</button>
+    </div>
+
+    <div class="counter" id="contadorAluno">Acertos: 0 de 0</div>
+    <button class="voltar" id="voltarAluno" type="button">⬅️ Voltar</button>
+  </div>
+
+  <div class="card" id="cardResultadoAluno" style="display:none">
+    <div class="result-box" aria-live="polite">
+      <img id="imgResultadoAluno" alt="Filhote resultante">
+      <div>
+        <div class="title" id="nomeResultadoAluno"></div>
+        <div class="curio" id="feedbackAluno" role="status"></div>
+        <div class="professor" id="explicacaoAluno"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modo Professor -->
+<div class="container" id="modoProfessor" style="display:none">
+  <!-- Card de cruzamento principal -->
+  <div class="card">
+    <div class="row" style="justify-content:space-between">
+      <div class="row">
+        <div>
+          <div>Tipo de pelagem do Gato A</div>
+          <select id="tipoAProf"></select>
+        </div>
+        <div>
+          <div>Tipo de pelagem do Gato B</div>
+          <select id="tipoBProf"></select>
+        </div>
+      </div>
+      <div class="row">
+        <button id="btnCruzarProf" class="btn-big" type="button">Cruzar 🧬</button>
+        <button id="btnSorteProf" type="button">Surpreenda-me 🎲</button>
+      </div>
+    </div>
+    <button class="voltar" id="voltarProf" type="button">⬅️ Voltar</button>
+  </div>
+
+  <div class="card" id="cardResultadoProf" style="display:none">
+    <div class="result-box" aria-live="polite">
+      <img id="imgResultadoProf" alt="Filhote resultante">
+      <div>
+        <div class="title" id="nomeResultadoProf"></div>
+        <div class="curio" id="curiosidadeProf"></div>
+        <div class="professor" id="explicacaoProf"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECURSOS DIDÁTICOS EXTRAS -->
+  <div class="card">
+    <div class="prof-section-header">
+      <div>
+        <div class="prof-section-header-title">
+          <span class="icon">📚</span>
+          <span>Recursos Didáticos do Professor</span>
+        </div>
+        <div class="prof-section-header-sub">
+          Escolha um módulo abaixo para explicar genética de forma visual, lúdica e interativa.
+        </div>
+        <div class="prof-chip-row">
+          <span class="prof-chip">🧬 Cruzamentos</span>
+          <span class="prof-chip">📊 Probabilidades</span>
+          <span class="prof-chip">🧠 Conceitos-chave</span>
+          <span class="prof-chip">🎯 Exercícios</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prof-tabs-wrapper">
+      <div class="prof-tabs">
+        <button class="prof-tab-btn active" data-tab="punnett" title="Visualizar genótipos e proporções" type="button">
+          <span class="emoji">🧮</span> Quadrado de Punnett<br><small>Genótipos & porcentagens</small>
+        </button>
+        <button class="prof-tab-btn" data-tab="painel" title="Resumo dos conceitos fundamentais" type="button">
+          <span class="emoji">🧠</span> Painel Didático<br><small>Conceitos básicos</small>
+        </button>
+        <button class="prof-tab-btn" data-tab="tutoriais" title="Passo a passo de aula" type="button">
+          <span class="emoji">📋</span> Tutoriais<br><small>Roteiro de aula</small>
+        </button>
+        <button class="prof-tab-btn" data-tab="graficos" title="Visualizar proporções em barras" type="button">
+          <span class="emoji">📊</span> Gráficos<br><small>Dominante x recessivo</small>
+        </button>
+        <button class="prof-tab-btn" data-tab="exercicios" title="Questões para trabalhar em sala" type="button">
+          <span class="emoji">📝</span> Exercícios<br><small>Questões guiadas</small>
+        </button>
+        <button class="prof-tab-btn" data-tab="simulacao" title="Simular populações grandes" type="button">
+          <span class="emoji">🎲</span> Simulação Populacional<br><small>Ninhadas maiores</small>
+        </button>
+      </div>
+
+      <!-- Quadrado de Punnett -->
+      <div class="prof-tab active" id="tab-punnett">
+        <div class="prof-block" style="background:rgba(59,130,246,.06);">
+          <div class="prof-block-header">
+            <span class="emoji">🧮</span>
+            <span>Quadrado de Punnett interativo</span>
+          </div>
+          <div class="prof-block-note">
+            Use este quadro ao vivo no quadro/projetor para mostrar como surgem as proporções 1:2:1 e 3:1.
+          </div>
+
+          <div class="punnett-wrap">
+            <div>
+              <div class="sim-row">
+                <span>Genótipo parental 1:</span>
+                <select id="punnettP1">
+                  <option>AA</option>
+                  <option selected>Aa</option>
+                  <option>aa</option>
+                </select>
+              </div>
+              <div class="sim-row">
+                <span>Genótipo parental 2:</span>
+                <select id="punnettP2">
+                  <option>AA</option>
+                  <option selected>Aa</option>
+                  <option>aa</option>
+                </select>
+              </div>
+              <button id="btnPunnett" style="margin-top:8px;" type="button">Atualizar quadrado</button>
+
+              <table class="punnett-grid" style="margin-top:10px;">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th id="p2g1">A</th>
+                    <th id="p2g2">a</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th id="p1g1">A</th>
+                    <td id="cell11">AA</td>
+                    <td id="cell12">Aa</td>
+                  </tr>
+                  <tr>
+                    <th id="p1g2">a</th>
+                    <td id="cell21">Aa</td>
+                    <td id="cell22">aa</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="punnett-info">
+              <p><strong>Resumo:</strong></p>
+              <p id="punnettResumo">Cruzamento clássico Aa x Aa → 25% AA, 50% Aa, 25% aa (3:1 no fenótipo).</p>
+              <p style="margin-top:6px;"><strong>Fenótipo:</strong></p>
+              <p id="punnettFenotipo">75% com característica dominante, 25% com característica recessiva.</p>
+              <p style="margin-top:6px;font-size:12px;">
+                Dica: peça que os alunos prevejam as proporções antes de clicar em “Atualizar quadrado”.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Painel Didático -->
+      <div class="prof-tab" id="tab-painel">
+        <div class="prof-block" style="background:rgba(16,185,129,.07);">
+          <div class="prof-block-header">
+            <span class="emoji">🧠</span>
+            <span>Painel de conceitos-chave</span>
+          </div>
+          <div class="prof-block-note">
+            Use estes blocos como “glossário vivo” durante a explicação. Cada termo é uma âncora pra discussão.
+          </div>
+
+          <div class="professor definition-list" style="margin-top:6px;">
+            <ul>
+              <li>
+                <span class="definition-badge">Gene</span>
+                <span>Trecho de DNA que codifica uma característica (ex.: cor da pelagem).</span>
+              </li>
+              <li>
+                <span class="definition-badge">Alelo</span>
+                <span>Variação de um gene (A = dominante, a = recessivo).</span>
+              </li>
+              <li>
+                <span class="definition-badge">Genótipo</span>
+                <span>Combinação de alelos (AA, Aa, aa) que o indivíduo carrega.</span>
+              </li>
+              <li>
+                <span class="definition-badge">Fenótipo</span>
+                <span>Característica observável (pelagem sólida, bicolor, tricolor…).</span>
+              </li>
+              <li>
+                <span class="definition-badge">Dominância</span>
+                <span>Alelo que se manifesta mesmo em heterozigose (Aa).</span>
+              </li>
+              <li>
+                <span class="definition-badge">Recessivo</span>
+                <span>Só aparece em homozigose (aa).</span>
+              </li>
+            </ul>
+            <p style="margin-top:4px;font-size:12px;">
+              Sugestão: peça exemplos do cotidiano (“quem aqui conhece um gato tricolor?”) e conecte cada caso aos termos acima.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tutoriais embutidos -->
+      <div class="prof-tab" id="tab-tutoriais">
+        <div class="prof-block" style="background:rgba(234,179,8,.07);">
+          <div class="prof-block-header">
+            <span class="emoji">📋</span>
+            <span>Roteiro de aula (passo a passo)</span>
+          </div>
+          <div class="prof-block-note">
+            Clique em cada passo para abrir/fechar os detalhes. Use como guia para uma aula inteira com o Felinator.
+          </div>
+
+          <div class="tutorial-steps">
+            <div class="step open">
+              <button class="step-header" type="button">
+                <div class="step-header-main">
+                  <div class="step-index">1</div>
+                  <span>Introdução aos fenótipos 🐱</span>
+                </div>
+                <span class="step-toggle-icon">▼</span>
+              </button>
+              <div class="step-body">
+                Apresente rapidamente os tipos de pelagem disponíveis no Felinator (Sólida, Bicolor, Tricolor, Tabby, Point, Arlequim, Van).
+                Peça que os alunos digam quais já viram na vida real.
+              </div>
+            </div>
+
+            <div class="step">
+              <button class="step-header" type="button">
+                <div class="step-header-main">
+                  <div class="step-index">2</div>
+                  <span>Gene, alelo, genótipo e fenótipo</span>
+                </div>
+                <span class="step-toggle-icon">▼</span>
+              </button>
+              <div class="step-body">
+                Use o <strong>Painel didático</strong> para explicar cada termo. A ideia é mostrar que o que vemos (fenótipo) é resultado
+                da combinação de alelos (genótipo) em um gene específico.
+              </div>
+            </div>
+
+            <div class="step">
+              <button class="step-header" type="button">
+                <div class="step-header-main">
+                  <div class="step-index">3</div>
+                  <span>Quadrado de Punnett na prática</span>
+                </div>
+                <span class="step-toggle-icon">▼</span>
+              </button>
+              <div class="step-body">
+                Abra o módulo de <strong>Quadrado de Punnett</strong> e comece com o clássico Aa x Aa.
+                Pergunte aos alunos qual porcentagem esperam de cada genótipo, só depois clique em “Atualizar quadrado”.
+              </div>
+            </div>
+
+            <div class="step">
+              <button class="step-header" type="button">
+                <div class="step-header-main">
+                  <div class="step-index">4</div>
+                  <span>Ligação com o Felinator (fenótipos)</span>
+                </div>
+                <span class="step-toggle-icon">▼</span>
+              </button>
+              <div class="step-body">
+                Volte ao topo do modo professor, escolha dois tipos de pelagem e clique em “Cruzar 🧬”.
+                Mostre como um único cruzamento representa apenas um filhote, mas as probabilidades vêm do quadrado de Punnett.
+              </div>
+            </div>
+
+            <div class="step">
+              <button class="step-header" type="button">
+                <div class="step-header-main">
+                  <div class="step-index">5</div>
+                  <span>Exercícios guiados</span>
+                </div>
+                <span class="step-toggle-icon">▼</span>
+              </button>
+              <div class="step-body">
+                Use o módulo <strong>Exercícios</strong> e peça que os alunos resolvam antes de clicar em “Mostrar resposta”.
+                Incentive que justifiquem o raciocínio usando termos como dominante, recessivo, heterozigoto etc.
+              </div>
+            </div>
+
+            <div class="step">
+              <button class="step-header" type="button">
+                <div class="step-header-main">
+                  <div class="step-index">6</div>
+                  <span>Simulação populacional</span>
+                </div>
+                <span class="step-toggle-icon">▼</span>
+              </button>
+              <div class="step-body">
+                Por fim, abra o módulo <strong>Simulação populacional</strong> e mostre como as proporções do quadrado de Punnett
+                tendem a aparecer quando o número de filhotes (N) aumenta.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gráficos (canvas) -->
+      <div class="prof-tab" id="tab-graficos">
+        <div class="prof-block" style="background:rgba(59,130,246,.06);">
+          <div class="prof-block-header">
+            <span class="emoji">📊</span>
+            <span>Gráfico de dominância x recessividade</span>
+          </div>
+          <div class="prof-block-note">
+            Visualize em barras as proporções de fenótipos dominantes e recessivos baseadas no último quadrado de Punnett.
+          </div>
+
+          <p style="font-size:14px;margin-top:6px;">
+            Clique em <strong>Atualizar gráfico</strong> depois de mexer nos genótipos do quadrado de Punnett.
+          </p>
+          <button id="btnDesenharGrafico" type="button">Atualizar gráfico</button>
+          <div class="canvas-wrap">
+            <canvas id="graficoCanvas" width="340" height="200"></canvas>
+          </div>
+          <p id="graficoLegenda" style="font-size:13px;margin-top:6px;">
+            Padrão: cruzamento Aa x Aa (3:1 → 75% dominante, 25% recessivo).
+          </p>
+        </div>
+      </div>
+
+      <!-- Sistema de exercícios -->
+      <div class="prof-tab" id="tab-exercicios">
+        <div class="prof-block" style="background:rgba(244,114,182,.08);">
+          <div class="prof-block-header">
+            <span class="emoji">📝</span>
+            <span>Exercícios rápidos</span>
+          </div>
+          <div class="prof-block-note">
+            Perfeitos para usar como disparadores de discussão, revisão ou avaliação formativa.
+          </div>
+
+          <div class="exercise-item">
+            <strong>Exercício 1:</strong> Dois gatos heterozigotos (Aa x Aa) para pelagem sólida (A) vs diluída (a)
+            são cruzados. Qual a proporção esperada de filhotes com pelagem recessiva?
+            <br>
+            <button class="btnMostrarResposta" data-target="ex1" type="button">Mostrar resposta</button>
+            <div class="exercise-answer" id="ex1">
+              25% dos filhotes terão pelagem recessiva (aa). Genótipos: 1 AA : 2 Aa : 1 aa, fenótipo 3:1.
+            </div>
+          </div>
+          <div class="exercise-item">
+            <strong>Exercício 2:</strong> Um gato homozigoto dominante (AA) cruza com um gato recessivo (aa).
+            Qual a proporção de genótipos e fenótipos?
+            <br>
+            <button class="btnMostrarResposta" data-target="ex2" type="button">Mostrar resposta</button>
+            <div class="exercise-answer" id="ex2">
+              100% dos filhotes serão Aa (heterozigotos) com fenótipo dominante. Genótipo 0 AA : 4 Aa : 0 aa.
+            </div>
+          </div>
+          <div class="exercise-item">
+            <strong>Exercício 3:</strong> Se uma gata tricolor geralmente é fêmea, que tipo de herança isso sugere?
+            <br>
+            <button class="btnMostrarResposta" data-target="ex3" type="button">Mostrar resposta</button>
+            <div class="exercise-answer" id="ex3">
+              Sugere herança <strong>ligada ao sexo</strong> (cromossomo X), onde alelos de cor estão no X e a combinação de dois X
+              permite a coexistência de preto e laranja.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Simulação populacional -->
+      <div class="prof-tab" id="tab-simulacao">
+        <div class="prof-block" style="background:rgba(56,189,248,.08);">
+          <div class="prof-block-header">
+            <span class="emoji">🎲</span>
+            <span>Simulação de ninhadas</span>
+          </div>
+          <div class="prof-block-note">
+            Transforme porcentagens em números concretos de filhotes e discuta flutuações em amostras pequenas.
+          </div>
+
+          <p style="font-size:14px;margin-top:6px;">
+            Aqui usamos a probabilidade dominante/recessiva do último quadrado de Punnett para simular uma população de filhotes.
+          </p>
+          <div class="sim-row">
+            <label for="tamanhoPop">Tamanho da população (N):</label>
+            <input type="number" id="tamanhoPop" value="40" min="4" max="1000" style="width:90px;">
+          </div>
+          <button id="btnSimularPop" style="margin-top:6px;" type="button">Simular população</button>
+          <div class="sim-output" id="simResultado">
+            (Aguardando simulação. Use primeiro o quadrado de Punnett ou deixe o padrão 3:1.)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<audio id="meow" preload="auto" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8bcd3f1d8a.mp3?filename=cat-meow-14536.mp3"></audio>
+
+<script>
+const TIPOS=['Sólida','Bicolor','Tricolor','Tabby (Tigrado)','Point','Arlequim','Van'];
+const IMG={
+  'Sólida':'https://upload.wikimedia.org/wikipedia/commons/5/55/Black_kitten_eyes.jpg',
+  'Bicolor':'https://upload.wikimedia.org/wikipedia/commons/1/16/Bicolor_kitten_sitting.jpg',
+  'Tricolor':'https://upload.wikimedia.org/wikipedia/commons/0/0e/Calico_kitten_sitting.jpg',
+  'Tabby (Tigrado)':'https://upload.wikimedia.org/wikipedia/commons/8/84/Tabby_kitten_in_grass.jpg',
+  'Point':'https://upload.wikimedia.org/wikipedia/commons/2/24/Siamese_kitten_blue_eyes.jpg',
+  'Arlequim':'https://upload.wikimedia.org/wikipedia/commons/1/18/Turkish_van_kitten.jpg',
+  'Van':'https://upload.wikimedia.org/wikipedia/commons/6/6e/Turkish_Van_Kitten.jpg'
+};
+const EXPLICACOES={
+  'Sólida':'O gene que cria desenhos está inativo. Exemplo: gato todo preto ou branco.',
+  'Bicolor':'O gene branco bloqueia o pigmento em partes do corpo, criando áreas sem cor.',
+  'Tricolor':'Mistura de genes que controlam laranja e preto. Por ser ligado ao X, ocorre quase só em fêmeas.',
+  'Tabby (Tigrado)':'Listras vêm de pelos com faixas de cores. É o padrão mais antigo nos felinos.',
+  'Point':'Mutação que ativa o pigmento apenas em partes frias, como nos siameses.',
+  'Arlequim':'Muito branco com manchas grandes de cor, intermediário entre bicolor e van.',
+  'Van':'O gene branco cobre quase todo o corpo, restando cor na cabeça e cauda.'
+};
+const CURIOS={
+  'Sólida':'O gene Agouti está desligado, resultando em uma única cor.',
+  'Bicolor':'O gene S impede a pigmentação em algumas áreas, criando manchas brancas.',
+  'Tricolor':'O gene laranja (O), ligado ao X, gera padrões variadas — por isso são quase sempre fêmeas.',
+  'Tabby (Tigrado)':'O gene Agouti (A) faz os pelos alternarem faixas de cor, criando listras ou manchas.',
+  'Point':'A pigmentação ocorre mais nas áreas frias do corpo: orelhas, patas e cauda.',
+  'Arlequim':'Apresenta muito branco com grandes manchas coloridas.',
+  'Van':'Quase todo branco, com cor apenas na cabeça e cauda.'
+};
+
+/* ======= RECURSO PROBABILÍSTICO ======= */
+
+const PROB_DISTR = {
+  'Sólida|Sólida': [
+    { tipo: 'Sólida', prob: 1.0 }
+  ],
+  'Sólida|Bicolor': [
+    { tipo: 'Sólida',  prob: 0.5 },
+    { tipo: 'Bicolor', prob: 0.5 }
+  ],
+  'Bicolor|Bicolor': [
+    { tipo: 'Sólida',   prob: 0.25 },
+    { tipo: 'Bicolor',  prob: 0.50 },
+    { tipo: 'Arlequim', prob: 0.25 }
+  ],
+  'Bicolor|Arlequim': [
+    { tipo: 'Bicolor',  prob: 0.5 },
+    { tipo: 'Arlequim', prob: 0.5 }
+  ],
+  'Arlequim|Arlequim': [
+    { tipo: 'Arlequim', prob: 0.7 },
+    { tipo: 'Van',      prob: 0.3 }
+  ],
+  'Bicolor|Van': [
+    { tipo: 'Bicolor',  prob: 0.3 },
+    { tipo: 'Arlequim', prob: 0.4 },
+    { tipo: 'Van',      prob: 0.3 }
+  ],
+  'Sólida|Arlequim': [
+    { tipo: 'Bicolor', prob: 1.0 }
+  ],
+  'Sólida|Van': [
+    { tipo: 'Bicolor', prob: 1.0 }
+  ],
+  'Sólida|Tricolor': [
+    { tipo: 'Sólida',   prob: 0.25 },
+    { tipo: 'Tricolor', prob: 0.75 }
+  ],
+  'Bicolor|Tricolor': [
+    { tipo: 'Bicolor',  prob: 0.5 },
+    { tipo: 'Tricolor', prob: 0.5 }
+  ],
+  'Tricolor|Tricolor': [
+    { tipo: 'Tricolor', prob: 1.0 }
+  ],
+  'Sólida|Tabby (Tigrado)': [
+    { tipo: 'Sólida',           prob: 0.5 },
+    { tipo: 'Tabby (Tigrado)',  prob: 0.5 }
+  ],
+  'Tabby (Tigrado)|Tabby (Tigrado)': [
+    { tipo: 'Tabby (Tigrado)', prob: 1.0 }
+  ],
+  'Sólida|Point': [
+    { tipo: 'Sólida', prob: 0.5 },
+    { tipo: 'Point',  prob: 0.5 }
+  ],
+  'Point|Point': [
+    { tipo: 'Point', prob: 1.0 }
+  ],
+  'Tabby (Tigrado)|Point': [
+    { tipo: 'Tabby (Tigrado)', prob: 0.5 },
+    { tipo: 'Point',           prob: 0.5 }
+  ],
+  'Tricolor|Point': [
+    { tipo: 'Tricolor', prob: 0.5 },
+    { tipo: 'Point',    prob: 0.5 }
+  ],
+  'Tabby (Tigrado)|Bicolor': [
+    { tipo: 'Tabby (Tigrado)', prob: 0.5 },
+    { tipo: 'Bicolor',         prob: 0.5 }
+  ],
+  'Tabby (Tigrado)|Van': [
+    { tipo: 'Tabby (Tigrado)', prob: 0.4 },
+    { tipo: 'Bicolor',         prob: 0.3 },
+    { tipo: 'Van',             prob: 0.3 }
+  ],
+  'Tricolor|Arlequim': [
+    { tipo: 'Tricolor', prob: 0.6 },
+    { tipo: 'Arlequim', prob: 0.4 }
+  ],
+  'Tricolor|Van': [
+    { tipo: 'Tricolor', prob: 0.6 },
+    { tipo: 'Van',      prob: 0.4 }
+  ],
+  'Point|Arlequim': [
+    { tipo: 'Point',   prob: 0.4 },
+    { tipo: 'Bicolor', prob: 0.6 }
+  ],
+  'Point|Van': [
+    { tipo: 'Point',   prob: 0.4 },
+    { tipo: 'Bicolor', prob: 0.6 }
+  ],
+  'Arlequim|Van': [
+    { tipo: 'Arlequim', prob: 0.5 },
+    { tipo: 'Van',      prob: 0.5 }
+  ]
+};
+
+function key(a, b){return a + '|' + b;}
+
+function escolherPorProb(distrib){
+  const r = Math.random();
+  let acumulado = 0;
+  for (const item of distrib){
+    acumulado += item.prob;
+    if (r <= acumulado){
+      return item.tipo;
+    }
+  }
+  return distrib[distrib.length - 1].tipo;
+}
+
+function resultadoTipo(a, b){
+  const dist = PROB_DISTR[key(a,b)] || PROB_DISTR[key(b,a)];
+  if (dist){return escolherPorProb(dist);}
+  return Math.random() < 0.5 ? a : b;
+}
+
+/* para o quiz: fenótipo mais provável (mantido como utilitário) */
+function tipoMaisProvavel(a, b){
+  const dist = PROB_DISTR[key(a,b)] || PROB_DISTR[key(b,a)];
+  if(dist && dist.length){
+    let best = dist[0];
+    for(const item of dist){
+      if(item.prob > best.prob) best = item;
+    }
+    return best.tipo;
+  }
+  return a;
+}
+
+const meow=document.getElementById('meow');
+
+/* preencher selects */
+function preencherSelects(selA,selB){
+  TIPOS.forEach(t=>{
+    const o=document.createElement('option');
+    o.value=t;o.textContent=t;
+    selA.appendChild(o.cloneNode(true));
+    selB.appendChild(o);
+  });
+  selA.value='Sólida';selB.value='Bicolor';
+}
+preencherSelects(document.getElementById('tipoAAluno'),document.getElementById('tipoBAluno'));
+preencherSelects(document.getElementById('tipoAProf'),document.getElementById('tipoBProf'));
+
+/* Lógica de alternativas no modo aluno */
+const letras=['A','B','C','D'];
+let respostaCorreta=null;
+let respostaJogador=null;
+let acertos=0,tentativas=0;
+
+function embaralhar(array){
+  for(let i=array.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [array[i],array[j]]=[array[j],array[i]];
+  }
+  return array;
+}
+
+function gerarOpcoesAluno(){
+  const a=document.getElementById('tipoAAluno').value;
+  const b=document.getElementById('tipoBAluno').value;
+
+  const tipoCorreto = resultadoTipo(a,b);
+  respostaCorreta = tipoCorreto;
+  respostaJogador=null;
+
+  const conjunto=new Set();
+  conjunto.add(tipoCorreto);
+  while(conjunto.size<4){
+    const r=TIPOS[Math.floor(Math.random()*TIPOS.length)];
+    conjunto.add(r);
+  }
+  const opcoes=embaralhar(Array.from(conjunto));
+  const cont=document.getElementById('opcoesAluno');
+  cont.innerHTML='';
+  opcoes.forEach((tipo,idx)=>{
+    const btn=document.createElement('button');
+    btn.type='button';
+    btn.className='option-btn';
+    btn.dataset.tipo=tipo;
+    btn.innerHTML=`<span class="letter">${letras[idx]}</span><span class="text">${tipo}</span>`;
+    btn.onclick=()=>{
+      document.querySelectorAll('#opcoesAluno .option-btn').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      respostaJogador=tipo;
+    };
+    cont.appendChild(btn);
+  });
+}
+
+/* Chamada ao iniciar modo aluno e ao mudar os pais */
+document.getElementById('tipoAAluno').addEventListener('change',gerarOpcoesAluno);
+document.getElementById('tipoBAluno').addEventListener('change',gerarOpcoesAluno);
+
+/* Mensagens de feedback */
+const MSGS_CERTAS=[
+  'Muito bem! Você acertou! 👏',
+  'Excelente! Resposta perfeita! 😺'
+];
+const MSGS_ERRADAS=[
+  'Não foi dessa vez... mas você está aprendendo! 🐾',
+  'Quase lá! Continue tentando! 💪'
+];
+
+function mostrarResultadoAluno(a,b,escolhaJogador){
+  const tipo = respostaCorreta || resultadoTipo(a,b);
+  tentativas++;
+  const acertou=(escolhaJogador===tipo);
+  if(acertou)acertos++;
+
+  const msgOk=MSGS_CERTAS[Math.floor(Math.random()*MSGS_CERTAS.length)];
+  const msgErro=MSGS_ERRADAS[Math.floor(Math.random()*MSGS_ERRADAS.length)];
+
+  document.getElementById('nomeResultadoAluno').textContent=`Resultado: ${tipo}`;
+  document.getElementById('feedbackAluno').textContent = acertou
+    ? `✅ ${msgOk} Este filhote é um dos possíveis da ninhada para esse cruzamento.`
+    : `❌ ${msgErro} Um dos filhotes possíveis sorteados para este cruzamento foi: ${tipo}.`;
+  document.getElementById('explicacaoAluno').textContent=EXPLICACOES[tipo];
+  document.getElementById('imgResultadoAluno').src=IMG[tipo];
+  document.getElementById('cardResultadoAluno').style.display='block';
+  document.getElementById('contadorAluno').textContent=`Acertos: ${acertos} de ${tentativas}`;
+  meow.play().catch(()=>{});
+
+  if(tentativas===5){
+    alert(`Sessão concluída! Você acertou ${acertos} de 5 cruzamentos!`);
+    acertos=0;tentativas=0;
+    document.getElementById('contadorAluno').textContent=`Acertos: 0 de 0`;
+  }
+}
+
+function mostrarResultadoProf(a,b){
+  const tipo=resultadoTipo(a,b);
+  document.getElementById('nomeResultadoProf').textContent=`Resultado: ${tipo}`;
+  document.getElementById('curiosidadeProf').textContent=CURIOS[tipo];
+  document.getElementById('explicacaoProf').textContent=EXPLICACOES[tipo];
+  document.getElementById('imgResultadoProf').src=IMG[tipo];
+  document.getElementById('cardResultadoProf').style.display='block';
+  meow.play().catch(()=>{});
+}
+
+/* ====== Autenticação Professor (e-mail qualquer + código) ====== */
+const emailProfInput=document.getElementById('emailProf');
+const senhaProfInput=document.getElementById('senhaProf');
+const erroAuth=document.getElementById('erroAuth');
+
+function emailValido(email){
+  if(!email) return false;
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+/* Carregar e-mail salvo, se existir */
+let emailSalvo=null;
+try{
+  emailSalvo=localStorage.getItem('felinatorProfEmail');
+}catch(e){
+  emailSalvo=null;
+}
+if(emailSalvo){
+  emailProfInput.value=emailSalvo;
+}
+
+/* Botões iniciais / navegação */
+document.getElementById('btnProfessor').onclick=()=>{
+  document.getElementById('inicio').style.display='none';
+  document.getElementById('authProf').style.display='block';
+  document.getElementById('headerTitle').textContent="🐾 Felinator — Verificação de Professor";
+  erroAuth.style.display='none';
+};
+document.getElementById('voltarAuth').onclick=()=>{
+  document.getElementById('authProf').style.display='none';
+  document.getElementById('inicio').style.display='block';
+  document.getElementById('headerTitle').textContent="🐾 Felinator — Simulador de Genética Felina";
+  erroAuth.style.display='none';
+};
+
+document.getElementById('gerarCodigo').onclick=()=>{
+  const hoje=new Date();
+  const codigo="PROF"+(hoje.getDate()+hoje.getMonth()+hoje.getFullYear());
+  alert("Código do dia: "+codigo);
+};
+
+document.getElementById('entrarProf').onclick=()=>{
+  const email=(emailProfInput.value||"").trim().toLowerCase();
+  const senha=(senhaProfInput.value||"").trim();
+
+  erroAuth.style.display='none';
+
+  if(!emailValido(email)){
+    erroAuth.textContent="Digite um e-mail válido (institucional ou pessoal).";
+    erroAuth.style.display='block';
+    return;
+  }
+
+  const hoje=new Date();
+  const codigoDia="PROF"+(hoje.getDate()+hoje.getMonth()+hoje.getFullYear());
+
+  if(senha==="MIAU-2025"||senha===codigoDia){
+    try{
+      localStorage.setItem('felinatorProfEmail',email);
+    }catch(e){}
+    document.getElementById('authProf').style.display='none';
+    document.getElementById('modoProfessor').style.display='block';
+    document.getElementById('headerTitle').textContent="🐾 Felinator — Modo Professor";
+    erroAuth.style.display='none';
+  }else{
+    erroAuth.textContent="Código incorreto. Tente novamente.";
+    erroAuth.style.display='block';
+  }
+};
+
+/* Modo aluno */
+document.getElementById('btnAluno').onclick=()=>{
+  document.getElementById('inicio').style.display='none';
+  document.getElementById('modoAluno').style.display='block';
+  document.getElementById('headerTitle').textContent="🐾 Felinator — Modo Aluno";
+  gerarOpcoesAluno();
+};
+
+document.getElementById('btnSorteAluno').onclick=()=>{
+  const a=document.getElementById('tipoAAluno'),
+        b=document.getElementById('tipoBAluno');
+  a.value=TIPOS[Math.floor(Math.random()*TIPOS.length)];
+  b.value=TIPOS[Math.floor(Math.random()*TIPOS.length)];
+  document.getElementById('cardResultadoAluno').style.display='none';
+  gerarOpcoesAluno();
+};
+
+document.getElementById('btnResultadoAluno').onclick=()=>{
+  if(!respostaJogador){
+    alert("Escolha uma alternativa (A, B, C ou D) antes de ver o resultado.");
+    return;
+  }
+  const a=document.getElementById('tipoAAluno').value;
+  const b=document.getElementById('tipoBAluno').value;
+  mostrarResultadoAluno(a,b,respostaJogador);
+};
+
+document.getElementById('voltarAluno').onclick=()=>{
+  document.getElementById('modoAluno').style.display='none';
+  document.getElementById('inicio').style.display='block';
+  document.getElementById('cardResultadoAluno').style.display='none';
+  document.getElementById('headerTitle').textContent="🐾 Felinator — Simulador de Genética Felina";
+};
+
+/* Modo professor (cruzamentos) */
+document.getElementById('btnCruzarProf').onclick=()=>{
+  mostrarResultadoProf(document.getElementById('tipoAProf').value,
+                       document.getElementById('tipoBProf').value);
+};
+document.getElementById('btnSorteProf').onclick=()=>{
+  const a=document.getElementById('tipoAProf'),
+        b=document.getElementById('tipoBProf');
+  a.value=TIPOS[Math.floor(Math.random()*TIPOS.length)];
+  b.value=TIPOS[Math.floor(Math.random()*TIPOS.length)];
+  mostrarResultadoProf(a.value,b.value);
+};
+document.getElementById('voltarProf').onclick=()=>{
+  document.getElementById('modoProfessor').style.display='none';
+  document.getElementById('inicio').style.display='block';
+  document.getElementById('cardResultadoProf').style.display='none';
+  document.getElementById('headerTitle').textContent="🐾 Felinator — Simulador de Genética Felina";
+};
+
+/* Alternar tema claro/escuro */
+const themeToggle=document.getElementById('themeToggle');
+themeToggle.onclick=()=>{
+  document.body.classList.toggle('dark');
+  const dark=document.body.classList.contains('dark');
+  themeToggle.textContent=dark?'🌞':'🌙';
+  try{
+    localStorage.setItem('felinatorTheme',dark?'dark':'light');
+  }catch(e){}
+  desenharGrafico();
+};
+try{
+  if(localStorage.getItem('felinatorTheme')==='dark'){
+    document.body.classList.add('dark');
+    themeToggle.textContent='🌞';
+  }
+}catch(e){}
+
+/* ==== Recursos didáticos do professor ==== */
+
+/* Tabs */
+document.querySelectorAll('.prof-tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const tab=btn.dataset.tab;
+    document.querySelectorAll('.prof-tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.prof-tab').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-'+tab).classList.add('active');
+  });
+});
+
+/* Quadrado de Punnett (monohíbrido A/a) */
+let ultimaStatsPunnett={dom:75,rec:25};
+
+function gametas(genotipo){
+  return [genotipo.charAt(0),genotipo.charAt(1)];
+}
+function ordenarGen(gen){
+  const arr=gen.split('');
+  arr.sort((x,y)=>{
+    if(x===y) return 0;
+    if(x.toUpperCase()===x && y.toLowerCase()===y) return -1;
+    if(x.toLowerCase()===x && y.toUpperCase()===y) return 1;
+    return x.localeCompare(y);
+  });
+  return arr.join('');
+}
+
+function atualizarPunnett(){
+  const p1=document.getElementById('punnettP1').value;
+  const p2=document.getElementById('punnettP2').value;
+  const g1=gametas(p1);
+  const g2=gametas(p2);
+
+  document.getElementById('p1g1').textContent=g1[0];
+  document.getElementById('p1g2').textContent=g1[1];
+  document.getElementById('p2g1').textContent=g2[0];
+  document.getElementById('p2g2').textContent=g2[1];
+
+  const c11=ordenarGen(g1[0]+g2[0]);
+  const c12=ordenarGen(g1[0]+g2[1]);
+  const c21=ordenarGen(g1[1]+g2[0]);
+  const c22=ordenarGen(g1[1]+g2[1]);
+
+  document.getElementById('cell11').textContent=c11;
+  document.getElementById('cell12').textContent=c12;
+  document.getElementById('cell21').textContent=c21;
+  document.getElementById('cell22').textContent=c22;
+
+  const gens=[c11,c12,c21,c22];
+  let contAA=0,contAa=0,contaa=0;
+  gens.forEach(g=>{
+    if(g==='AA') contAA++;
+    else if(g==='aa') contaa++;
+    else contAa++;
+  });
+
+  const total=4;
+  const pAA=(contAA/total)*100;
+  const pAa=(contAa/total)*100;
+  const paa=(contaa/total)*100;
+  const pDom=pAA+pAa;
+  const pRec=paa;
+
+  ultimaStatsPunnett={dom:pDom,rec:pRec};
+
+  document.getElementById('punnettResumo').textContent=
+    `Genótipos esperados: ${pAA.toFixed(0)}% AA, ${pAa.toFixed(0)}% Aa, ${paa.toFixed(0)}% aa.`;
+  document.getElementById('punnettFenotipo').textContent=
+    `${pDom.toFixed(0)}% com fenótipo dominante, ${pRec.toFixed(0)}% com fenótipo recessivo.`;
+}
+
+document.getElementById('btnPunnett').addEventListener('click',atualizarPunnett);
+atualizarPunnett();
+
+/* Gráfico em canvas (dominante vs recessivo) */
+const canvas=document.getElementById('graficoCanvas');
+const ctx=canvas.getContext('2d');
+
+function desenharGrafico(){
+  const dom=ultimaStatsPunnett.dom||75;
+  const rec=ultimaStatsPunnett.rec||25;
+
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  const w=80;
+  const maxAltura=140;
+  const maxValor=Math.max(dom,rec,1);
+  const escala=maxAltura/maxValor;
+  const yBase=canvas.height-30;
+
+  const isDark=document.body.classList.contains('dark');
+  const eixoCor=isDark ? "#e5e7eb" : "#4b5563";
+  const textoCor=isDark ? "#e5e7eb" : "#111827";
+  const barraDomCor=isDark ? "#6366f1" : "#4f46e5";
+  const barraRecCor=isDark ? "#2dd4bf" : "#14b8a6";
+
+  ctx.beginPath();
+  ctx.moveTo(20,yBase);
+  ctx.lineTo(canvas.width-20,yBase);
+  ctx.strokeStyle=eixoCor;
+  ctx.lineWidth=1;
+  ctx.stroke();
+
+  const hDom=dom*escala;
+  const xDom=80;
+  ctx.fillStyle=barraDomCor;
+  ctx.fillRect(xDom,yBase-hDom,w,hDom);
+  ctx.fillStyle=textoCor;
+  ctx.font="12px Nunito";
+  ctx.fillText("Dominante",xDom-4,yBase+14);
+  ctx.fillText(dom.toFixed(1)+"%",xDom+12,yBase-hDom-6);
+
+  const hRec=rec*escala;
+  const xRec=200;
+  ctx.fillStyle=barraRecCor;
+  ctx.fillRect(xRec,yBase-hRec,w,hRec);
+  ctx.fillStyle=textoCor;
+  ctx.fillText("Recessivo",xRec,yBase+14);
+  ctx.fillText(rec.toFixed(1)+"%",xRec+12,yBase-hRec-6);
+
+  document.getElementById('graficoLegenda').textContent=
+    `Gráfico baseado no último quadrado de Punnett: ${dom.toFixed(1)}% dominante, ${rec.toFixed(1)}% recessivo.`;
+}
+
+document.getElementById('btnDesenharGrafico').addEventListener('click',desenharGrafico);
+desenharGrafico();
+
+/* Sistema de exercícios: mostrar resposta */
+document.querySelectorAll('.btnMostrarResposta').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const id=btn.dataset.target;
+    const ans=document.getElementById(id);
+    if(ans.style.display==='block'){
+      ans.style.display='none';
+      btn.textContent='Mostrar resposta';
+    }else{
+      ans.style.display='block';
+      btn.textContent='Ocultar resposta';
+    }
+  });
+});
+
+/* Simulação populacional */
+document.getElementById('btnSimularPop').addEventListener('click',()=>{
+  const N=parseInt(document.getElementById('tamanhoPop').value)||40;
+  const pDom=(ultimaStatsPunnett.dom||75)/100;
+  const pRec=(ultimaStatsPunnett.rec||25)/100;
+
+  let contDom=0,contRec=0;
+  for(let i=0;i<N;i++){
+    if(Math.random()<pDom) contDom++; else contRec++;
+  }
+  const percDom=(contDom/N*100).toFixed(1);
+  const percRec=(contRec/N*100).toFixed(1);
+
+  document.getElementById('simResultado').textContent=
+    `Em uma população de ${N} filhotes, foram simulados ${contDom} com fenótipo dominante (${percDom}%) `
+    + `e ${contRec} com fenótipo recessivo (${percRec}%). `
+    + `Compare com as proporções teóricas do quadrado de Punnett.`;
+});
+
+/* Tutoriais: passos colapsáveis */
+document.querySelectorAll('.step-header').forEach(header=>{
+  header.addEventListener('click',()=>{
+    const step=header.parentElement;
+    const open = step.classList.contains('open');
+    document.querySelectorAll('.step').forEach(s=>s.classList.remove('open'));
+    if(!open){step.classList.add('open');}
+  });
+});
+
+/* ====== MENU LATERAL + PALETAS GENÉTICAS ====== */
+
+const sidePanel = document.getElementById('sidePanel');
+const menuToggle = document.getElementById('menuToggle');
+const closePanel = document.getElementById('closePanel');
+
+menuToggle.addEventListener('click', () => {
+  sidePanel.classList.toggle('open');
+});
+
+closePanel.addEventListener('click', () => {
+  sidePanel.classList.remove('open');
+});
+
+/* Fecha o painel se clicar fora dele (opcional) */
+document.addEventListener('click', (e) => {
+  if (!sidePanel.classList.contains('open')) return;
+  const isClickInside = sidePanel.contains(e.target) || menuToggle.contains(e.target);
+  if (!isClickInside) sidePanel.classList.remove('open');
+});
+
+/* Paletas genéticas (afetando accent1/2 do tema) */
+
+const PALETAS = {
+  melanina: {
+    nome: "Melanina Felina",
+    cores: ["#1A1A1C", "#4E3B2F", "#F39B3D", "#EDD9B4", "#F7F7F5"],
+    vars: {
+      "--accent1-light": "#F39B3D",
+      "--accent2-light": "#4E3B2F",
+      "--accent1-dark": "#F39B3D",
+      "--accent2-dark": "#4E3B2F"
+    }
+  },
+  tabby: {
+    nome: "Tabby Agouti",
+    cores: ["#D6C6A6", "#6A5338", "#3E2F20", "#E8D9C3", "#F5F1E8"],
+    vars: {
+      "--accent1-light": "#6A5338",
+      "--accent2-light": "#D6C6A6",
+      "--accent1-dark": "#6A5338",
+      "--accent2-dark": "#D6C6A6"
+    }
+  },
+  siames: {
+    nome: "Siamês Point",
+    cores: ["#E8D8C5", "#4B3E36", "#C5AFA2", "#8A8A95", "#78BFEA"],
+    vars: {
+      "--accent1-light": "#4B3E36",
+      "--accent2-light": "#78BFEA",
+      "--accent1-dark": "#4B3E36",
+      "--accent2-dark": "#78BFEA"
+    }
+  },
+  calico: {
+    nome: "Calico X-Inativo",
+    cores: ["#F49B45", "#1E1E1E", "#7C553B", "#EFDCC9", "#FBFBF8"],
+    vars: {
+      "--accent1-light": "#F49B45",
+      "--accent2-light": "#1E1E1E",
+      "--accent1-dark": "#F49B45",
+      "--accent2-dark": "#1E1E1E"
+    }
+  },
+  van: {
+    nome: "Van / Arlequim",
+    cores: ["#FDFDFB", "#E6C298", "#9A6F50", "#CAB8A6", "#343434"],
+    vars: {
+      "--accent1-light": "#E6C298",
+      "--accent2-light": "#9A6F50",
+      "--accent1-dark": "#E6C298",
+      "--accent2-dark": "#9A6F50"
+    }
+  },
+  olhos: {
+    nome: "Olhos Felinos",
+    cores: ["#7CCF8A", "#C78A2A", "#A8D7FF", "#2F2F31", "#E8E2D7"],
+    vars: {
+      "--accent1-light": "#7CCF8A",
+      "--accent2-light": "#C78A2A",
+      "--accent1-dark": "#7CCF8A",
+      "--accent2-dark": "#C78A2A"
+    }
+  }
+};
+
+function gerarPaletas(){
+  const grid = document.getElementById('paletaGrid');
+  if(!grid) return;
+  grid.innerHTML = "";
+  Object.entries(PALETAS).forEach(([id,pal])=>{
+    const div = document.createElement('div');
+    div.className = 'paleta-card';
+    div.dataset.id = id;
+    div.innerHTML = `
+      <div class="paleta-nome">${pal.nome}</div>
+      <div class="paleta-colors">
+        ${pal.cores.map(c=>`<div class="color-dot" style="background:${c}"></div>`).join('')}
+      </div>
+    `;
+    div.onclick = () => aplicarPaleta(id);
+    grid.appendChild(div);
+  });
+}
+
+function aplicarPaleta(id){
+  const pal = PALETAS[id];
+  if(!pal) return;
+  Object.entries(pal.vars).forEach(([variavel,valor])=>{
+    document.documentElement.style.setProperty(variavel,valor);
+  });
+  try{
+    localStorage.setItem('felinatorPaleta',id);
+  }catch(e){}
+}
+
+/* Carrega paleta salva e gera cards */
+window.addEventListener('DOMContentLoaded', () => {
+  gerarPaletas();
+  let salva = null;
+  try{
+    salva = localStorage.getItem('felinatorPaleta');
+  }catch(e){}
+  if(salva && PALETAS[salva]) aplicarPaleta(salva);
+});
+</script>
+</body>
+</html>
