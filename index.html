@@ -1061,11 +1061,37 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
   font-weight:600;padding:8px 18px;border-radius:12px;cursor:pointer;font-size:14px;
 }
 .voltar:hover{filter:brightness(0.93)}
+
+  header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, var(--accent1-light), var(--accent2-light));
+  color: #fff;
+  padding: 10px 18px;
+  font-family: Poppins;
+  font-weight: 600;
+}
+
+.header-logo img {
+  height: 55px; /* AQUI VOCÊ AJUSTA O TAMANHO */
+  width: auto;
+  display: block;
+}
+
+@media (max-width: 480px) {
+  .header-logo img {
+    height: 40px; /* versão mobile */
+  }
+}
 </style>
 </head>
 <body data-palette="bicolor">
 <header>
-  <span id="headerTitle">🐾 Felinator — Simulador de Genética Felina</span>
+  <div class="header-logo">
+    <img src="Felinator/img/felinator-logo-final.svg" alt="Logo Felinator">
+  </div>
+
   <div class="header-actions">
     <button id="themeToggle" class="theme-toggle" title="Alternar tema">🌙</button>
     <button id="menuToggle" class="menu-toggle" title="Abrir menu">☰</button>
@@ -1318,8 +1344,6 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
     <div class="row" style="justify-content:flex-end;margin-top:12px">
       <button id="btnResultadoAluno" class="btn-big">Ver Resultado ✅</button>
     </div>
-
-    <div class="counter" id="contadorAluno">Acertos: 0 de 0</div>
     <button class="voltar" id="voltarAluno">⬅️ Voltar</button>
   </div>
 
@@ -2040,14 +2064,7 @@ function mostrarResultadoAluno(a,b,escolhaJogador){
   document.getElementById('explicacaoAluno').textContent=EXPLICACOES[tipo];
   document.getElementById('imgResultadoAluno').src = imagemAleatoria(tipo);
   document.getElementById('cardResultadoAluno').style.display='block';
-  document.getElementById('contadorAluno').textContent=`Acertos: ${acertos} de ${tentativas}`;
   meow.play().catch(()=>{});
-
-  if(tentativas===5){
-    alert(`Sessão concluída! Você acertou ${acertos} de 5 cruzamentos!`);
-    acertos=0;tentativas=0;
-    document.getElementById('contadorAluno').textContent=`Acertos: 0 de 0`;
-  }
 }
 
 function mostrarResultadoProf(a,b){
@@ -2156,7 +2173,6 @@ document.getElementById('voltarAluno').onclick=()=>{
   document.getElementById('modoAluno').style.display='none';
   document.getElementById('inicio').style.display='block';
   document.getElementById('cardResultadoAluno').style.display='none';
-  document.getElementById('headerTitle').textContent="🐾 Felinator — Simulador de Genética Felina";
 };
 
 document.getElementById('btnCruzarProf').onclick=()=>{
@@ -2174,7 +2190,6 @@ document.getElementById('voltarProf').onclick=()=>{
   document.getElementById('modoProfessor').style.display='none';
   document.getElementById('inicio').style.display='block';
   document.getElementById('cardResultadoProf').style.display='none';
-  document.getElementById('headerTitle').textContent="🐾 Felinator — Simulador de Genética Felina";
 };
 
 // ============================
