@@ -2099,11 +2099,7 @@ if(emailSalvo){
 }
 
 document.getElementById('btnProfessor').onclick=()=>{
- const inicio = document.getElementById('inicio');
-inicio.style.visibility = 'hidden';
-inicio.style.height = '0';
-inicio.style.minHeight = '0';
-inicio.style.padding = '0';
+document.getElementById('inicio').style.display = 'none';
 
   document.getElementById('authProf').style.display='block';
   document.getElementById('headerTitle').textContent="🐾 Felinator — Verificação de Professor";
@@ -2111,12 +2107,7 @@ inicio.style.padding = '0';
 };
 document.getElementById('voltarAuth').onclick=()=>{
   document.getElementById('authProf').style.display='none';
-const inicio = document.getElementById('inicio');
-inicio.style.visibility = 'visible';
-inicio.style.height = '';
-inicio.style.minHeight = '';
-inicio.style.padding = '';
-
+document.getElementById('inicio').style.display='block';
   document.getElementById('headerTitle').textContent="🐾 Felinator — Simulador de Genética Felina";
   erroAuth.style.display='none';
 };
@@ -2158,12 +2149,7 @@ document.getElementById('entrarProf').onclick=()=>{
 //   NAVEGAÇÃO MODOS
 // ============================
 document.getElementById('btnAluno').onclick=()=>{
-const inicio = document.getElementById('inicio');
-inicio.style.visibility = 'hidden';
-inicio.style.height = '0';
-inicio.style.minHeight = '0';
-inicio.style.padding = '0';
-
+ document.getElementById('inicio').style.display='none';
   document.getElementById('modoAluno').style.display='block';
   document.getElementById('headerTitle').textContent="🐾 Felinator — Modo Aluno";
   gerarOpcoesAluno();
@@ -2190,12 +2176,7 @@ document.getElementById('btnResultadoAluno').onclick=()=>{
 
 document.getElementById('voltarAluno').onclick=()=>{
   document.getElementById('modoAluno').style.display='none';
-  const inicio = document.getElementById('inicio');
-inicio.style.visibility = 'visible';
-inicio.style.height = '';
-inicio.style.minHeight = '';
-inicio.style.padding = '';
-
+  document.getElementById('inicio').style.display='block';
   document.getElementById('cardResultadoAluno').style.display='none';
 };
 
