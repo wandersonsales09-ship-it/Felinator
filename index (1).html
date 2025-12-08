@@ -491,9 +491,6 @@ button:hover{filter:brightness(1.08);transform:translateY(-1px)}
 .prof-section-header-title{
   font-weight:800;font-size:16px;display:flex;align-items:center;gap:8px;
 }
-.prof-section-header-title span.icon{
-  font-size:20px;
-}
 .prof-section-header-sub{
   font-size:13px;color:#6b7280;margin-top:4px;
 }
@@ -1089,6 +1086,12 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
     height: 80px; /* versão mobile */
   }
 }
+
+/* small helper to ensure containers show clearly when toggled */
+.main-screen {
+  display: block;
+  z-index: 1;
+}
 </style>
 </head>
 <body data-palette="bicolor">
@@ -1208,7 +1211,7 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
 </aside>
 
 <!-- NOVA TELA INICIAL COM PROFUNDIDADE, CORES E DNA/RNA -->
-<div id="inicio" class="hero-warm">
+<div id="inicio" class="hero-warm main-screen">
   <div class="hero-shell">
     <div class="hero-main-card">
       <!-- Coluna esquerda: texto + cards grandes -->
@@ -1224,7 +1227,7 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
         </p>
         <div class="hero-modes">
           <!-- IMPORTANTE: IDs mantidos para o JS -->
-          <button class="mode-card mode-aluno-card" id="btnAluno">
+          <button class="mode-card mode-aluno-card" id="btnAluno" type="button">
             <div class="mode-icon-pill">🐾</div>
             <div class="mode-text-block">
               <strong>Modo Aluno</strong>
@@ -1235,7 +1238,7 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
             </div>
           </button>
 
-          <button class="mode-card mode-prof-card" id="btnProfessor">
+          <button class="mode-card mode-prof-card" id="btnProfessor" type="button">
             <div class="mode-icon-pill">🧪</div>
             <div class="mode-text-block">
               <strong>Modo Professor</strong>
@@ -1270,7 +1273,7 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
 </div>
 
 <!-- Tela de autenticação do professor -->
-<div class="container" id="authProf" style="display:none">
+<div class="container main-screen" id="authProf" style="display:none">
   <div class="card center card-prof">
     <h3>🔐 Verificação de Professor</h3>
     <p>Use seu e-mail (institucional <strong>ou</strong> pessoal) e o código de acesso.</p>
@@ -1285,7 +1288,7 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
 
     <div style="margin-top:10px">
       <button id="entrarProf" class="btn-big">Entrar</button>
-      <button id="gerarCodigo">Gerar código do dia</button>
+      <button id="gerarCodigo" type="button">Gerar código do dia</button>
       <button class="voltar" id="voltarAuth">⬅️ Voltar</button>
     </div>
     <p id="erroAuth" style="color:#ef4444;margin-top:10px;display:none"></p>
@@ -1296,7 +1299,7 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
 </div>
 
 <!-- Modo Aluno -->
-<div class="container" id="modoAluno" style="display:none">
+<div class="container main-screen" id="modoAluno" style="display:none">
 
   <!-- Template lúdico do modo aluno -->
   <div class="mode-template mode-template-aluno">
@@ -1332,7 +1335,7 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
         </div>
       </div>
       <div class="row">
-        <button id="btnSorteAluno">Surpreenda-me 🎲</button>
+        <button id="btnSorteAluno" type="button">Surpreenda-me 🎲</button>
       </div>
     </div>
 
@@ -1363,7 +1366,7 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
 </div>
 
 <!-- Modo Professor -->
-<div class="container" id="modoProfessor" style="display:none">
+<div class="container main-screen" id="modoProfessor" style="display:none">
 
   <!-- Template lúdico do modo professor -->
   <div class="mode-template mode-template-prof">
@@ -1400,8 +1403,8 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
         </div>
       </div>
       <div class="row">
-        <button id="btnCruzarProf" class="btn-big">Cruzar 🧬</button>
-        <button id="btnSorteProf">Surpreenda-me 🎲</button>
+        <button id="btnCruzarProf" class="btn-big" type="button">Cruzar 🧬</button>
+        <button id="btnSorteProf" type="button">Surpreenda-me 🎲</button>
       </div>
     </div>
     <button class="voltar" id="voltarProf">⬅️ Voltar</button>
@@ -1489,7 +1492,7 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
                   <option>aa</option>
                 </select>
               </div>
-              <button id="btnPunnett" style="margin-top:8px;">Atualizar quadrado</button>
+              <button id="btnPunnett" style="margin-top:8px;" type="button">Atualizar quadrado</button>
 
               <table class="punnett-grid" style="margin-top:10px;">
                 <thead>
@@ -1584,7 +1587,7 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
 
           <div class="tutorial-steps">
             <div class="step open">
-              <button class="step-header">
+              <button class="step-header" type="button">
                 <div class="step-header-main">
                   <div class="step-index">1</div>
                   <span>Introdução aos fenótipos 🐱</span>
@@ -1598,7 +1601,7 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
             </div>
 
             <div class="step">
-              <button class="step-header">
+              <button class="step-header" type="button">
                 <div class="step-header-main">
                   <div class="step-index">2</div>
                   <span>Gene, alelo, genótipo e fenótipo</span>
@@ -1612,7 +1615,7 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
             </div>
 
             <div class="step">
-              <button class="step-header">
+              <button class="step-header" type="button">
                 <div class="step-header-main">
                   <div class="step-index">3</div>
                   <span>Quadrado de Punnett na prática</span>
@@ -1626,7 +1629,7 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
             </div>
 
             <div class="step">
-              <button class="step-header">
+              <button class="step-header" type="button">
                 <div class="step-header-main">
                   <div class="step-index">4</div>
                   <span>Ligação com o Felinator (fenótipos)</span>
@@ -1641,7 +1644,7 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
             </div>
 
             <div class="step">
-              <button class="step-header">
+              <button class="step-header" type="button">
                 <div class="step-header-main">
                   <div class="step-index">5</div>
                   <span>Exercícios guiados</span>
@@ -1656,7 +1659,7 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
             </div>
 
             <div class="step">
-              <button class="step-header">
+              <button class="step-header" type="button">
                 <div class="step-header-main">
                   <div class="step-index">6</div>
                   <span>Simulação populacional</span>
@@ -1686,7 +1689,7 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
           <p style="font-size:14px;margin-top:6px;">
             Clique em <strong>Atualizar gráfico</strong> depois de mexer nos genótipos do quadrado de Punnett.
           </p>
-          <button id="btnDesenharGrafico">Atualizar gráfico</button>
+          <button id="btnDesenharGrafico" type="button">Atualizar gráfico</button>
           <div class="canvas-wrap">
             <canvas id="graficoCanvas" width="340" height="200"></canvas>
           </div>
@@ -1711,7 +1714,7 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
             <strong>Exercício 1:</strong> Dois gatos heterozigotos (Aa x Aa) para pelagem sólida (A) vs diluída (a)
             são cruzados. Qual a proporção esperada de filhotes com pelagem recessiva?
             <br>
-            <button class="btnMostrarResposta" data-target="ex1">Mostrar resposta</button>
+            <button class="btnMostrarResposta" data-target="ex1" type="button">Mostrar resposta</button>
             <div class="exercise-answer" id="ex1">
               25% dos filhotes terão pelagem recessiva (aa). Genótipos: 1 AA : 2 Aa : 1 aa, fenótipo 3:1.
             </div>
@@ -1720,7 +1723,7 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
             <strong>Exercício 2:</strong> Um gato homozigoto dominante (AA) cruza com um gato recessivo (aa).
             Qual a proporção de genótipos e fenótipos?
             <br>
-            <button class="btnMostrarResposta" data-target="ex2">Mostrar resposta</button>
+            <button class="btnMostrarResposta" data-target="ex2" type="button">Mostrar resposta</button>
             <div class="exercise-answer" id="ex2">
               100% dos filhotes serão Aa (heterozigotos) com fenótipo dominante. Genótipo 0 AA : 4 Aa : 0 aa.
             </div>
@@ -1728,7 +1731,7 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
           <div class="exercise-item">
             <strong>Exercício 3:</strong> Se uma gata tricolor geralmente é fêmea, que tipo de herança isso sugere?
             <br>
-            <button class="btnMostrarResposta" data-target="ex3">Mostrar resposta</button>
+            <button class="btnMostrarResposta" data-target="ex3" type="button">Mostrar resposta</button>
             <div class="exercise-answer" id="ex3">
               Sugere herança <strong>ligada ao sexo</strong> (cromossomo X), onde alelos de cor estão no X e a combinação de dois X
               permite a coexistência de preto e laranja.
@@ -1755,7 +1758,7 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
             <label for="tamanhoPop">Tamanho da população (N):</label>
             <input type="number" id="tamanhoPop" value="40" min="4" max="1000" style="width:90px;">
           </div>
-          <button id="btnSimularPop" style="margin-top:6px;">Simular população</button>
+          <button id="btnSimularPop" style="margin-top:6px;" type="button">Simular população</button>
           <div class="sim-output" id="simResultado">
             (Aguardando simulação. Use primeiro o quadrado de Punnett ou deixe o padrão 3:1.)
           </div>
@@ -1768,7 +1771,30 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
 
 <audio id="meow" preload="auto" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8bcd3f1d8a.mp3?filename=cat-meow-14536.mp3"></audio>
 
+<!-- Simple visual error overlay (visible if a JS runtime error occurs) -->
+<div id="errorOverlay" style="display:none;position:fixed;inset:12px;border-radius:12px;padding:16px;background:#fff3f3;color:#7f1d1d;z-index:9999;box-shadow:0 10px 40px rgba(0,0,0,.5);font-family:Nunito,system-ui;">
+  <strong>Erro de script detectado</strong>
+  <div id="errorOverlayText" style="margin-top:8px;font-size:13px;"></div>
+  <div style="margin-top:8px"><button id="dismissError" type="button">Fechar</button></div>
+</div>
+
 <script>
+// ============================
+// Small runtime error catcher so the page doesn't "disappear" silently.
+// Shows a visible overlay with the error message.
+window.addEventListener('error',function(ev){
+  try{
+    const overlay=document.getElementById('errorOverlay');
+    const txt=document.getElementById('errorOverlayText');
+    txt.textContent = ev.message + " — em " + (ev.filename||'') + ":" + (ev.lineno||'');
+    overlay.style.display='block';
+    console.error(ev.error || ev);
+  }catch(e){ console.error('Erro ao mostrar overlay de erro', e); }
+});
+document.getElementById('dismissError').addEventListener('click',()=>{
+  document.getElementById('errorOverlay').style.display='none';
+});
+
 // ============================
 //   DADOS BÁSICOS DO FELINATOR
 // ============================
@@ -2010,8 +2036,13 @@ function embaralhar(array){
 }
 
 function gerarOpcoesAluno(){
-  const a=document.getElementById('tipoAAluno').value;
-  const b=document.getElementById('tipoBAluno').value;
+  // defensive guard: ensure DOM exists
+  const selA=document.getElementById('tipoAAluno');
+  const selB=document.getElementById('tipoBAluno');
+  if(!selA || !selB) return;
+
+  const a=selA.value;
+  const b=selB.value;
   const tipoCorreto=tipoMaisProvavel(a,b);
   respostaCorreta=tipoCorreto;
   respostaJogador=null;
@@ -2066,9 +2097,12 @@ function mostrarResultadoAluno(a,b,escolhaJogador){
     ? `✅ ${msgOk}`
     : `❌ ${msgErro} O resultado correto era: ${tipo}.`;
   document.getElementById('explicacaoAluno').textContent=EXPLICACOES[tipo];
-  document.getElementById('imgResultadoAluno').src = imagemAleatoria(tipo);
+  const img=document.getElementById('imgResultadoAluno');
+  const src=imagemAleatoria(tipo);
+  if(src) img.src = src;
+  else img.removeAttribute('src');
   document.getElementById('cardResultadoAluno').style.display='block';
-  meow.play().catch(()=>{});
+  try{ meow.play().catch(()=>{}); }catch(e){}
 }
 
 function mostrarResultadoProf(a,b){
@@ -2076,9 +2110,40 @@ function mostrarResultadoProf(a,b){
   document.getElementById('nomeResultadoProf').textContent=`Resultado: ${tipo}`;
   document.getElementById('curiosidadeProf').textContent=CURIOS[tipo];
   document.getElementById('explicacaoProf').textContent=EXPLICACOES[tipo];
-  document.getElementById('imgResultadoProf').src = imagemAleatoria(tipo);
+  const img=document.getElementById('imgResultadoProf');
+  const src=imagemAleatoria(tipo);
+  if(src) img.src = src;
+  else img.removeAttribute('src');
   document.getElementById('cardResultadoProf').style.display='block';
-  meow.play().catch(()=>{});
+  try{ meow.play().catch(()=>{}); }catch(e){}
+}
+
+// ============================
+//   HELPERS PARA TROCAR TELAS
+// ============================
+
+function hideAllMainScreens(){
+  ['inicio','authProf','modoAluno','modoProfessor'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.style.display='none';
+  });
+}
+
+function showScreen(id){
+  try{
+    hideAllMainScreens();
+    const el=document.getElementById(id);
+    if(!el) {
+      console.warn('Elemento de tela não encontrado:', id);
+      return;
+    }
+    el.style.display='block';
+    // small accessibility/visibility guard: scroll to top of shown screen
+    window.scrollTo({top:0,behavior:'instant'});
+  }catch(e){
+    console.error('Erro em showScreen', e);
+    throw e;
+  }
 }
 
 // ============================
@@ -2094,35 +2159,31 @@ function emailValido(email){
 }
 
 const emailSalvo=localStorage.getItem('felinatorProfEmail');
-if(emailSalvo){
-  emailProfInput.value=emailSalvo;
-}
+if(emailSalvo && emailProfInput) emailProfInput.value=emailSalvo;
 
-document.getElementById('btnProfessor').onclick=()=>{
-document.getElementById('inicio').style.display = 'none';
-
-  document.getElementById('authProf').style.display='block';
+document.getElementById('btnProfessor').addEventListener('click',()=>{
+  // show auth screen
+  showScreen('authProf');
   document.getElementById('headerTitle').textContent="🐾 Felinator — Verificação de Professor";
-  erroAuth.style.display='none';
-};
-document.getElementById('voltarAuth').onclick=()=>{
-  document.getElementById('authProf').style.display='none';
-document.getElementById('inicio').style.display='block';
+  if(erroAuth) erroAuth.style.display='none';
+});
+document.getElementById('voltarAuth').addEventListener('click',()=>{
+  showScreen('inicio');
   document.getElementById('headerTitle').textContent="🐾 Felinator — Simulador de Genética Felina";
-  erroAuth.style.display='none';
-};
+  if(erroAuth) erroAuth.style.display='none';
+});
 
-document.getElementById('gerarCodigo').onclick=()=>{
+document.getElementById('gerarCodigo').addEventListener('click',()=>{
   const hoje=new Date();
   const codigo="PROF"+(hoje.getDate()+hoje.getMonth()+hoje.getFullYear());
   alert("Código do dia: "+codigo);
-};
+});
 
-document.getElementById('entrarProf').onclick=()=>{
+document.getElementById('entrarProf').addEventListener('click',()=>{
   const email=(emailProfInput.value||"").trim().toLowerCase();
   const senha=(senhaProfInput.value||"").trim();
 
-  erroAuth.style.display='none';
+  if(erroAuth) erroAuth.style.display='none';
 
   if(!emailValido(email)){
     erroAuth.textContent="Digite um e-mail válido (institucional ou pessoal).";
@@ -2135,36 +2196,34 @@ document.getElementById('entrarProf').onclick=()=>{
 
   if(senha==="MIAU-2025"||senha===codigoDia){
     localStorage.setItem('felinatorProfEmail',email);
-    document.getElementById('authProf').style.display='none';
-    document.getElementById('modoProfessor').style.display='block';
+    showScreen('modoProfessor');
     document.getElementById('headerTitle').textContent="🐾 Felinator — Modo Professor";
-    erroAuth.style.display='none';
+    if(erroAuth) erroAuth.style.display='none';
   }else{
     erroAuth.textContent="Código incorreto. Tente novamente.";
     erroAuth.style.display='block';
   }
-};
+});
 
 // ============================
 //   NAVEGAÇÃO MODOS
 // ============================
-document.getElementById('btnAluno').onclick=()=>{
- document.getElementById('inicio').style.display='none';
-  document.getElementById('modoAluno').style.display='block';
+document.getElementById('btnAluno').addEventListener('click',()=>{
+  showScreen('modoAluno');
   document.getElementById('headerTitle').textContent="🐾 Felinator — Modo Aluno";
   gerarOpcoesAluno();
-};
+});
 
-document.getElementById('btnSorteAluno').onclick=()=>{
+document.getElementById('btnSorteAluno').addEventListener('click',()=>{
   const a=document.getElementById('tipoAAluno');
   const b=document.getElementById('tipoBAluno');
   a.value=TIPOS[Math.floor(Math.random()*TIPOS.length)];
   b.value=TIPOS[Math.floor(Math.random()*TIPOS.length)];
   document.getElementById('cardResultadoAluno').style.display='none';
   gerarOpcoesAluno();
-};
+});
 
-document.getElementById('btnResultadoAluno').onclick=()=>{
+document.getElementById('btnResultadoAluno').addEventListener('click',()=>{
   if(!respostaJogador){
     alert("Escolha uma alternativa (A, B, C ou D) antes de ver o resultado.");
     return;
@@ -2172,34 +2231,30 @@ document.getElementById('btnResultadoAluno').onclick=()=>{
   const a=document.getElementById('tipoAAluno').value;
   const b=document.getElementById('tipoBAluno').value;
   mostrarResultadoAluno(a,b,respostaJogador);
-};
+});
 
-document.getElementById('voltarAluno').onclick=()=>{
-  document.getElementById('modoAluno').style.display='none';
-  document.getElementById('inicio').style.display='block';
+document.getElementById('voltarAluno').addEventListener('click',()=>{
   document.getElementById('cardResultadoAluno').style.display='none';
-};
+  showScreen('inicio');
+  document.getElementById('headerTitle').textContent="🐾 Felinator 1.0 — Simulador de Genética Felina";
+});
 
-document.getElementById('btnCruzarProf').onclick=()=>{
+document.getElementById('btnCruzarProf').addEventListener('click',()=>{
   mostrarResultadoProf(document.getElementById('tipoAProf').value,
                        document.getElementById('tipoBProf').value);
-};
-document.getElementById('btnSorteProf').onclick=()=>{
+});
+document.getElementById('btnSorteProf').addEventListener('click',()=>{
   const a=document.getElementById('tipoAProf');
   const b=document.getElementById('tipoBProf');
   a.value=TIPOS[Math.floor(Math.random()*TIPOS.length)];
   b.value=TIPOS[Math.floor(Math.random()*TIPOS.length)];
   mostrarResultadoProf(a.value,b.value);
-};
-document.getElementById('voltarProf').onclick=()=>{
-  document.getElementById('modoProfessor').style.display='none';
-  const inicio = document.getElementById('inicio');
-  inicio.style.visibility = 'visible';
-  inicio.style.height = '';
-  inicio.style.minHeight = '';
-  inicio.style.padding = '';
+});
+document.getElementById('voltarProf').addEventListener('click',()=>{
   document.getElementById('cardResultadoProf').style.display='none';
-};
+  showScreen('inicio');
+  document.getElementById('headerTitle').textContent="🐾 Felinator 1.0 — Simulador de Genética Felina";
+});
 
 // ============================
 //   THEME & PALETAS (HEADER + SIDEBAR)
@@ -2217,7 +2272,7 @@ function setDarkMode(on){
     document.body.classList.remove('dark');
     themeToggle.textContent='🌙';
     themeToggleSide.textContent='Modo escuro';
-    localStorage.setItem('felinatorPalette','light');
+    // don't overwrite palette here — keep user's palette
     localStorage.setItem('felinatorTheme','light');
   }
 }
@@ -2226,14 +2281,14 @@ function setDarkMode(on){
 const savedTheme=localStorage.getItem('felinatorTheme');
 setDarkMode(savedTheme==='dark');
 
-themeToggle.onclick=()=>{
+themeToggle.addEventListener('click',()=>{
   const dark=!document.body.classList.contains('dark');
   setDarkMode(dark);
-};
-themeToggleSide.onclick=()=>{
+});
+themeToggleSide.addEventListener('click',()=>{
   const dark=!document.body.classList.contains('dark');
   setDarkMode(dark);
-};
+});
 
 // paletas
 const paletteButtons=document.querySelectorAll('.palette-item');
@@ -2287,7 +2342,8 @@ document.querySelectorAll('.prof-tab-btn').forEach(btn=>{
     document.querySelectorAll('.prof-tab-btn').forEach(b=>b.classList.remove('active'));
     document.querySelectorAll('.prof-tab').forEach(t=>t.classList.remove('active'));
     btn.classList.add('active');
-    document.getElementById('tab-'+tab).classList.add('active');
+    const target=document.getElementById('tab-'+tab);
+    if(target) target.classList.add('active');
   });
 });
 
