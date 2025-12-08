@@ -1099,6 +1099,39 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
     border-radius: 12px;
     object-fit: cover;
 } 
+
+  /* --- Correção HERO: impedir bloqueio de clique --- */
+
+/* Garante que a Hero nunca bloqueie cliques nos botões */
+#inicio::before,
+#inicio::after {
+    pointer-events: none !important;
+}
+
+/* Caso tenha sido adicionada alguma imagem de fundo futurista */
+#inicio img,
+.hero-img-futurista {
+    pointer-events: none !important;
+}
+
+/* Garante que o conteúdo principal da Hero sempre fique clicável */
+.hero-main-card, 
+.hero-col-left, 
+.hero-col-right,
+.mode-card,
+button,
+.mode-text-block {
+    position: relative;
+    z-index: 20 !important;
+    pointer-events: auto !important;
+}
+
+/* Garante que qualquer camada decorativa fique atrás */
+#inicio {
+    position: relative;
+    z-index: 1;
+}
+
 </style>
 </head>
 <body data-palette="bicolor">
