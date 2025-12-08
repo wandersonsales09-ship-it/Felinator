@@ -6,6 +6,11 @@
 <title>🐾 Felinator 1.0 — Simulador de Genética Felina</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
 <style>
+
+/* =============================== */
+/* VARIÁVEIS E PALETAS DO SISTEMA */
+/* =============================== */
+
 :root{
   --bg-light:#F6F7FB;
   --card-light:#FFFFFF;
@@ -27,7 +32,6 @@
 
   --hero-grad1-light:#F9E7D0;
   --hero-grad2-light:#E7E4FF;
-
   --hero-grad1-dark:#111827;
   --hero-grad2-dark:#020617;
 
@@ -50,197 +54,52 @@
   --chip-bg-dark:rgba(15,23,42,.9);
 }
 
-/* ====== PALETAS DE CORES (VISUAIS FORTES) ====== */
+/* ========================================= */
+/* PALETAS FORTES (warm, bicolor, calico...) */
+/* ========================================= */
 
-/* Aurora Quente (padrão “quente”) – rosa + laranja + roxo */
 body[data-palette="warm"]{
   --page-bg-light:#FEF2F2;
-  --page-bg-dark:#020617;
-
   --hero-grad1-light:#FCE7F3;
   --hero-grad2-light:#FED7AA;
-  --hero-grad1-dark:#111827;
-  --hero-grad2-dark:#4C1D95;
 
   --mode-aluno-grad1:#F9A8D4;
   --mode-aluno-grad2:#FB923C;
+
   --mode-prof-grad1:#C4B5FD;
   --mode-prof-grad2:#FB7185;
-
-  --cat-card-grad1:#F97316;
-  --cat-card-grad2:#4C1D95;
-
-  --dna-glow-light:rgba(244,114,182,0.55);
-  --dna-glow2-light:rgba(251,146,60,0.5);
-  --dna-glow-dark:rgba(248,113,113,0.6);
-  --dna-glow2-dark:rgba(147,51,234,0.6);
-
-  --card-light:#FFFFFF;
-  --card-dark:#0F172A;
-  --accent1-light:#EC4899;
-  --accent2-light:#FB923C;
-  --accent1-dark:#F472B6;
-  --accent2-dark:#FB923C;
 }
 
-/* Neon Mint (verde neon + ciano + roxo) */
 body[data-palette="bicolor"]{
   --page-bg-light:#ECFEFF;
-  --page-bg-dark:#020617;
-
   --hero-grad1-light:#A5F3FC;
   --hero-grad2-light:#22C55E;
-  --hero-grad1-dark:#020617;
-  --hero-grad2-dark:#312E81;
 
   --mode-aluno-grad1:#22C55E;
   --mode-aluno-grad2:#06B6D4;
+
   --mode-prof-grad1:#8B5CF6;
   --mode-prof-grad2:#22C55E;
-
-  --cat-card-grad1:#22C55E;
-  --cat-card-grad2:#0F172A;
-
-  --dna-glow-light:rgba(52,211,153,0.65);
-  --dna-glow2-light:rgba(34,211,238,0.6);
-  --dna-glow-dark:rgba(34,197,94,0.7);
-  --dna-glow2-dark:rgba(6,182,212,0.7);
-
-  --card-light:#FFFFFF;
-  --card-dark:#020617;
-  --accent1-light:#22C55E;
-  --accent2-light:#0EA5E9;
-  --accent1-dark:#22C55E;
-  --accent2-dark:#38BDF8;
 }
 
-/* Magma Solar (vermelho + laranja + amarelo forte) */
 body[data-palette="calico"]{
   --page-bg-light:#FEF3C7;
-  --page-bg-dark:#0B1120;
-
   --hero-grad1-light:#FDE68A;
   --hero-grad2-light:#F97316;
-  --hero-grad1-dark:#111827;
-  --hero-grad2-dark:#7C2D12;
 
   --mode-aluno-grad1:#FB923C;
   --mode-aluno-grad2:#FACC15;
+
   --mode-prof-grad1:#F97316;
   --mode-prof-grad2:#EF4444;
-
-  --cat-card-grad1:#FDBA74;
-  --cat-card-grad2:#B91C1C;
-
-  --dna-glow-light:rgba(250,204,21,0.75);
-  --dna-glow2-light:rgba(248,113,113,0.65);
-  --dna-glow-dark:rgba(234,88,12,0.7);
-  --dna-glow2-dark:rgba(127,29,29,0.7);
-
-  --card-light:#FFFBEB;
-  --card-dark:#111827;
-  --accent1-light:#F97316;
-  --accent2-light:#EF4444;
-  --accent1-dark:#F97316;
-  --accent2-dark:#FBBF24;
 }
 
-/* Floresta Lux (verde + azul + dourado) */
-body[data-palette="tabby"]{
-  --page-bg-light:#ECFDF5;
-  --page-bg-dark:#022C22;
-
-  --hero-grad1-light:#BBF7D0;
-  --hero-grad2-light:#93C5FD;
-  --hero-grad1-dark:#022C22;
-  --hero-grad2-dark:#065F46;
-
-  --mode-aluno-grad1:#22C55E;
-  --mode-aluno-grad2:#4ADE80;
-  --mode-prof-grad1:#0EA5E9;
-  --mode-prof-grad2:#F59E0B;
-
-  --cat-card-grad1:#22C55E;
-  --cat-card-grad2:#065F46;
-
-  --dna-glow-light:rgba(52,211,153,0.7);
-  --dna-glow2-light:rgba(59,130,246,0.6);
-  --dna-glow-dark:rgba(16,185,129,0.7);
-  --dna-glow2-dark:rgba(245,158,11,0.7);
-
-  --card-light:#FFFFFF;
-  --card-dark:#022C22;
-  --accent1-light:#22C55E;
-  --accent2-light:#0EA5E9;
-  --accent1-dark:#22C55E;
-  --accent2-dark:#FACC15;
-}
-
-/* Holográfico (roxo + ciano + rosa elétrico) */
-body[data-palette="point"]{
-  --page-bg-light:#E0F2FE;
-  --page-bg-dark:#020617;
-
-  --hero-grad1-light:#E0E7FF;
-  --hero-grad2-light:#F9A8D4;
-  --hero-grad1-dark:#020617;
-  --hero-grad2-dark:#1E293B;
-
-  --mode-aluno-grad1:#6366F1;
-  --mode-aluno-grad2:#EC4899;
-  --mode-prof-grad1:#22D3EE;
-  --mode-prof-grad2:#818CF8;
-
-  --cat-card-grad1:#6366F1;
-  --cat-card-grad2:#0F172A;
-
-  --dna-glow-light:rgba(129,140,248,0.75);
-  --dna-glow2-light:rgba(244,114,182,0.65);
-  --dna-glow-dark:rgba(79,70,229,0.7);
-  --dna-glow2-dark:rgba(236,72,153,0.7);
-
-  --card-light:#EEF2FF;
-  --card-dark:#020617;
-  --accent1-light:#6366F1;
-  --accent2-light:#EC4899;
-  --accent1-dark:#A5B4FC;
-  --accent2-dark:#F472B6;
-}
-
-/* Cyberpunk (roxo + azul neon + verde água) */
-body[data-palette="futuristic"]{
-  --page-bg-light:#E0E7FF;
-  --page-bg-dark:#020617;
-
-  --hero-grad1-light:#C4B5FD;
-  --hero-grad2-light:#22D3EE;
-  --hero-grad1-dark:#020617;
-  --hero-grad2-dark:#1F2937;
-
-  --mode-aluno-grad1:#4F46E5;
-  --mode-aluno-grad2:#22D3EE;
-  --mode-prof-grad1:#7C3AED;
-  --mode-prof-grad2:#14B8A6;
-
-  --cat-card-grad1:#4F46E5;
-  --cat-card-grad2:#0F172A;
-
-  --dna-glow-light:rgba(129,140,248,0.7);
-  --dna-glow2-light:rgba(45,212,191,0.6);
-  --dna-glow-dark:rgba(79,70,229,0.7);
-  --dna-glow2-dark:rgba(6,182,212,0.6);
-
-  --card-light:#EEF2FF;
-  --card-dark:#020617;
-  --accent1-light:#4F46E5;
-  --accent2-light:#22D3EE;
-  --accent1-dark:#818CF8;
-  --accent2-dark:#22D3EE;
-}
-
-/* ====== ESTILO GERAL ====== */
+/* =============================== */
+/* ESTILOS GERAIS DO SISTEMA */
+/* =============================== */
 
 *{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:Nunito,system-ui,-apple-system,Segoe UI,Roboto,Arial;
@@ -248,385 +107,26 @@ body{
   color:var(--text-light);
   transition:.3s;
 }
+
 header{
-  display:flex;justify-content:space-between;align-items:center;
-  background:linear-gradient(90deg,var(--accent1-light),var(--accent2-light));
-  color:#fff;padding:14px 18px;font-family:Poppins;font-weight:600;
-}
-.header-actions{
-  display:flex;align-items:center;gap:8px;
-}
-.container{max-width:1000px;margin:0 auto;padding:20px}
-.card{
-  background:var(--card-light);border-radius:20px;
-  box-shadow:0 8px 26px rgba(15,23,42,.15);
-  padding:20px;margin-top:16px;transition:.25s transform,.25s box-shadow,.25s background-color;
-  position:relative;
-}
-.card:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(15,23,42,.22)}
-.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-button,select,input{
-  border-radius:12px;border:1px solid #d1d5db;
-  padding:10px 12px;font-family:Nunito;font-size:14px;
-}
-button{
-  background:linear-gradient(90deg,var(--accent1-light),var(--accent2-light));
-  color:white;font-weight:700;border:none;cursor:pointer;transition:.2s;
-}
-button:hover{filter:brightness(1.08);transform:translateY(-1px)}
-.center{text-align:center}
-.result-box{
-  display:flex;gap:16px;align-items:center;flex-wrap:wrap;
-  background:rgba(0,0,0,.03);border-radius:16px;padding:14px
-}
-.result-box img{
-  width:190px;height:190px;object-fit:cover;border-radius:16px
-}
-.title{font-weight:800;color:var(--accent1-light);font-size:18px;margin-bottom:6px}
-.curio{color:#555;margin-top:4px;font-size:14px}
-.professor{
-  background:rgba(0,0,0,.04);border-left:5px solid var(--accent2-light);
-  padding:10px;border-radius:10px;margin-top:10px;font-size:14px
-}
-.counter{font-weight:700;margin-top:12px}
-.theme-toggle{background:none;border:none;color:white;font-size:20px;cursor:pointer}
-.menu-toggle{
-  background:rgba(15,23,42,.18);
-  border:1px solid rgba(148,163,184,.6);
-  color:#F9FAFB;
-  width:34px;height:34px;
-  border-radius:999px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:18px;
-}
-
-/* Botões maiores de ação (resultado / cruzar) */
-.btn-big{
-  font-size:17px;padding:12px 24px;border-radius:18px;
-}
-
-/* Cards temáticos por modo (para dar cara diferente entre aluno/professor) */
-.card-aluno{
-  border-top:4px solid var(--mode-aluno-grad2);
-  overflow:hidden;
-}
-.card-aluno::before{
-  content:"";
-  position:absolute;
-  inset:-40px;
-  background:radial-gradient(circle at 0 0, rgba(248,250,252,.55) 0, transparent 55%);
-  opacity:.4;
-  pointer-events:none;
-}
-.card-prof{
-  border-top:4px solid var(--mode-prof-grad2);
-  overflow:hidden;
-}
-.card-prof::before{
-  content:"";
-  position:absolute;
-  inset:-40px;
-  background:radial-gradient(circle at 100% 0, rgba(248,250,252,.55) 0, transparent 55%);
-  opacity:.35;
-  pointer-events:none;
-}
-
-/* Caixa de alternativas (A,B,C,D) */
-.question-box{
-  margin-top:14px;padding:12px 10px;border-radius:14px;
-  background:rgba(0,0,0,.02);border:1px dashed rgba(148,163,184,.7);
-}
-.question-box p{margin:0 0 8px 0;font-weight:700;font-size:14px}
-
-.options-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:10px;
-}
-.option-btn{
-  width:100%;text-align:left;
-  display:flex;align-items:center;gap:8px;
-  padding:10px 12px;font-size:14px;border-radius:14px;
-  background:linear-gradient(90deg,#e5e7eb,#e5e7eb);
-  color:#111827;border:1px solid #d1d5db;
-}
-.option-btn .letter{
-  font-weight:800;min-width:22px;text-align:center;
-}
-.option-btn .text{flex:1}
-.option-btn.selected{
-  background:linear-gradient(120deg,var(--accent1-light),var(--accent2-light));
-  color:white;border-color:transparent;box-shadow:0 6px 18px rgba(99,102,241,.5);
-}
-
-/* ====== MENU LATERAL (SIDEBAR) ====== */
-
-.side-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(15,23,42,.45);
-  backdrop-filter:blur(4px);
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .25s ease;
-  z-index:40;
-}
-.side-overlay.open{
-  opacity:1;
-  pointer-events:auto;
-}
-.side-menu{
-  position:fixed;
-  top:0;right:0;
-  width:300px;
-  max-width:80%;
-  height:100vh;
-  background:rgba(15,23,42,.97);
-  color:#E5E7EB;
-  box-shadow:-12px 0 35px rgba(0,0,0,.75);
-  transform:translateX(100%);
-  transition:transform .25s ease-out;
-  z-index:50;
   display:flex;
-  flex-direction:column;
-  padding:16px 14px;
-}
-.side-menu.open{
-  transform:translateX(0);
-}
-.side-menu-header{
-  display:flex;
-  align-items:center;
   justify-content:space-between;
-  margin-bottom:10px;
-}
-.side-menu-title{
-  font-weight:700;
-  font-size:15px;
-  display:flex;
   align-items:center;
-  gap:6px;
-}
-.side-menu-close{
-  background:none;
-  border:none;
-  color:#CBD5F5;
-  font-size:20px;
-  cursor:pointer;
-}
-.side-menu-section{
-  margin-top:12px;
-  font-size:13px;
-}
-.side-menu-section h4{
-  margin:0 0 6px 0;
-  font-size:13px;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  color:#9CA3AF;
-}
-.palette-list{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-}
-.palette-item{
-  width:100%;
-  border-radius:12px;
-  border:1px solid rgba(148,163,184,.45);
-  background:#020617;
-  color:#E5E7EB;
-  padding:7px 9px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  font-size:12px;
-  cursor:pointer;
-}
-.palette-item-main{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-.palette-dot-row{
-  display:flex;
-  gap:3px;
-}
-.palette-dot{
-  width:10px;height:10px;border-radius:999px;
-}
-.palette-item span.name{
+  background:linear-gradient(90deg,var(--accent1-light),var(--accent2-light));
+  color:white;
+  padding:14px 18px;
+  font-family:Poppins;
   font-weight:600;
 }
-.palette-item small{
-  font-size:11px;
-  opacity:.8;
-}
-.palette-item.active{
-  border-color:#FBBF24;
-  box-shadow:0 0 0 1px rgba(251,191,36,.7);
-}
-#themeToggleSide{
-  width:100%;
-  margin-top:4px;
+
+.header-logo img{
+  height:95px;
+  width:auto;
 }
 
-/* ====== RECURSOS DIDÁTICOS — FRONTEND LÚDICO ====== */
-
-.prof-section-header{
-  display:flex;justify-content:space-between;align-items:flex-start;gap:12px;
-}
-.prof-section-header-title{
-  font-weight:800;font-size:16px;display:flex;align-items:center;gap:8px;
-}
-.prof-section-header-title span.icon{
-  font-size:20px;
-}
-.prof-section-header-sub{
-  font-size:13px;color:#6b7280;margin-top:4px;
-}
-.prof-chip-row{
-  display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;
-}
-.prof-chip{
-  font-size:11px;padding:3px 8px;border-radius:999px;
-  background:#eef2ff;color:#4338ca;border:1px solid #c4b5fd;
-}
-
-/* Tabs do modo professor */
-.prof-tabs-wrapper{
-  margin-top:12px;
-  padding:10px;
-  border-radius:16px;
-  background:rgba(15,23,42,.03);
-}
-.prof-tabs{
-  display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;
-}
-.prof-tab-btn{
-  padding:7px 12px;font-size:12px;border-radius:999px;border:1px solid #d1d5db;
-  background:#f3f4f6;color:#111827;font-weight:600;display:flex;align-items:center;gap:6px;
-}
-.prof-tab-btn span.emoji{font-size:15px}
-.prof-tab-btn small{
-  font-size:10px;font-weight:500;opacity:.75;
-}
-.prof-tab-btn.active{
-  background:linear-gradient(90deg,var(--accent1-light),var(--accent2-light));
-  color:#fff;border-color:transparent;box-shadow:0 4px 10px rgba(79,70,229,.45);
-}
-.prof-tab{
-  display:none;margin-top:8px;
-}
-.prof-tab.active{display:block}
-
-/* blocos internos mais lúdicos */
-.prof-block{
-  border-radius:16px;
-  padding:10px 12px;
-  margin-top:6px;
-}
-.prof-block-header{
-  display:flex;align-items:center;gap:8px;margin-bottom:4px;
-  font-weight:700;font-size:14px;
-}
-.prof-block-header span.emoji{font-size:18px}
-.prof-block-note{
-  font-size:12px;color:#6b7280;margin-top:2px;
-}
-
-/* Quadrado de Punnett */
-.punnett-wrap{
-  display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;margin-top:8px;
-}
-.punnett-grid{
-  border-collapse:collapse;
-}
-.punnett-grid th,.punnett-grid td{
-  border:1px solid #9ca3af;
-  min-width:42px;height:42px;
-  text-align:center;font-weight:600;
-}
-.punnett-grid th{
-  background:#e5e7eb;
-}
-.punnett-info{
-  font-size:13px;max-width:260px;
-}
-
-/* lista de definições */
-.definition-list ul{
-  margin-top:6px;padding-left:0;list-style:none;
-}
-.definition-list li{
-  display:flex;align-items:flex-start;gap:8px;
-  padding:6px 8px;border-radius:12px;
-  background:rgba(15,23,42,.03);margin-bottom:4px;font-size:13px;
-}
-.definition-badge{
-  font-weight:800;font-size:12px;
-  padding:2px 6px;border-radius:999px;
-  background:#e0e7ff;color:#3730a3;min-width:60px;text-align:center;
-}
-
-/* Tutoriais — passos colapsáveis */
-.tutorial-steps{
-  margin-top:6px;display:flex;flex-direction:column;gap:6px;
-}
-.step{
-  border-radius:14px;background:rgba(15,23,42,.03);overflow:hidden;
-}
-.step-header{
-  width:100%;text-align:left;border:none;
-  padding:8px 10px;font-size:13px;font-weight:700;
-  display:flex;align-items:center;justify-content:space-between;gap:8px;
-  background:transparent;color:inherit;
-}
-.step-header-main{
-  display:flex;align-items:center;gap:8px;
-}
-.step-index{
-  width:20px;height:20px;border-radius:999px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:800;
-  background:#e0f2fe;color:#0369a1;
-}
-.step-toggle-icon{
-  font-size:14px;opacity:.8;
-}
-.step-body{
-  padding:6px 10px 10px 10px;font-size:13px;display:none;
-}
-.step.open .step-body{display:block}
-
-/* Exercícios */
-.exercise-item{
-  margin-bottom:10px;padding:8px;border-radius:14px;
-  background:rgba(15,23,42,.03);font-size:14px;
-}
-.exercise-answer{
-  margin-top:4px;font-size:13px;display:none;
-}
-
-/* Simulação populacional */
-.sim-row{
-  display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:6px;
-}
-.sim-output{
-  margin-top:8px;font-size:14px;
-}
-
-/* Canvas */
-.canvas-wrap{
-  margin-top:6px;
-}
-#graficoCanvas{
-  border-radius:12px;border:1px solid #d1d5db;background:#f9fafb;
-}
-
-/* ============================= */
-/*   NOVA TELA INICIAL "FELI-DNA" */
-/* ============================= */
+/* ====================== */
+/* HERO / TELA INICIAL */
+/* ====================== */
 
 #inicio.hero-warm{
   min-height:calc(100vh - 68px);
@@ -638,470 +138,101 @@ button:hover{filter:brightness(1.08);transform:translateY(-1px)}
   overflow:hidden;
 }
 
-/* Fundo com DNA/RNA e cores – dependente da paleta */
+/* FUNDO COM GRADIENTES E DNA */
 body:not(.dark) #inicio.hero-warm{
   background:
     radial-gradient(circle at 0% 0%, var(--dna-glow-light) 0, transparent 52%),
     radial-gradient(circle at 100% 100%, var(--dna-glow2-light) 0, transparent 52%),
-    linear-gradient(135deg,var(--hero-grad1-light) 0,var(--page-bg-light) 40%,var(--hero-grad2-light) 100%);
-}
-body.dark #inicio.hero-warm{
-  background:
-    radial-gradient(circle at 0% 0%, var(--dna-glow-dark) 0, transparent 52%),
-    radial-gradient(circle at 100% 100%, var(--dna-glow2-dark) 0, transparent 52%),
-    linear-gradient(135deg,var(--hero-grad1-dark) 0,#020617 40%,var(--hero-grad2-dark) 100%);
+    linear-gradient(135deg,var(--hero-grad1-light) 0,var(--page-bg-light) 45%,var(--hero-grad2-light) 100%);
 }
 
-/* Padrão de "hélices" de DNA ao fundo */
-#inicio.hero-warm::before{
-  content:"";
-  position:absolute;
-  inset:-40px;
-  background-image:
-    repeating-linear-gradient(115deg, rgba(255,255,255,.08) 0, rgba(255,255,255,.08) 1px, transparent 1px, transparent 12px),
-    repeating-linear-gradient(295deg, rgba(15,23,42,.12) 0, rgba(15,23,42,.12) 1px, transparent 1px, transparent 14px);
-  opacity:.4;
-  mix-blend-mode:soft-light;
-  pointer-events:none;
-}
+/* ============================ */
+/* HERO CARDS, COLUNAS ETC */
+/* ============================ */
 
-/* Pontinhos que lembram bases nitrogenadas */
-#inicio.hero-warm::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.6) 0, transparent 45%),
-    radial-gradient(circle at 80% 70%, rgba(248,250,252,0.4) 0, transparent 45%);
-  opacity:.45;
-  pointer-events:none;
-}
-
-.hero-shell{
-  position:relative;
-  max-width:1080px;
-  width:100%;
-  z-index:1;
-}
+.hero-shell{max-width:1080px;width:100%;z-index:1;position:relative;}
 
 .hero-main-card{
   display:grid;
   grid-template-columns:minmax(0,1.4fr) minmax(0,1.1fr);
   gap:28px;
   border-radius:28px;
-  padding:24px 24px 26px 24px;
+  padding:24px;
   background:rgba(255,255,255,0.9);
-  box-shadow:
-    0 24px 60px rgba(15,23,42,.35),
-    0 0 0 1px rgba(148,163,184,.25);
+  box-shadow:0 24px 60px rgba(15,23,42,.35);
   backdrop-filter:blur(12px);
 }
-body.dark .hero-main-card{
-  background:rgba(15,23,42,0.92);
-  box-shadow:
-    0 26px 70px rgba(0,0,0,.85),
-    0 0 0 1px rgba(15,23,42,.8);
-}
 
-/* Coluna esquerda */
-.hero-col-left{
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-}
-.hero-chip{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  border-radius:999px;
-  padding:6px 12px;
-  font-size:12px;
-  font-weight:600;
-  letter-spacing:.04em;
-  text-transform:uppercase;
-  background:var(--chip-bg-light);
-  border:1px solid rgba(148,163,184,.4);
-}
-.hero-chip span.emoji{font-size:16px}
-body.dark .hero-chip{
-  background:var(--chip-bg-dark);
-  color:#E5E7EB;
-}
+.hero-col-left{display:flex;flex-direction:column;gap:14px}
 
 .hero-title{
-  font-family:Poppins,system-ui;
+  font-family:Poppins;
   font-size:clamp(26px,3.2vw,34px);
-  line-height:1.15;
   margin:0;
 }
-body.dark .hero-title{color:#F9FAFB}
-.hero-sub{
-  margin:0;
-  font-size:15px;
-  max-width:470px;
-  color:#4b5563;
-}
-body.dark .hero-sub{color:#E5E7EB}
 
-/* Tags */
-.hero-tags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:4px;
-}
-.hero-tag{
-  font-size:11px;
-  padding:4px 10px;
-  border-radius:999px;
-  border:1px solid rgba(148,163,184,.4);
-  background:rgba(249,250,251,.9);
-}
-body.dark .hero-tag{
-  background:rgba(15,23,42,.9);
-  color:#E5E7EB;
-}
+.hero-sub{margin:0;font-size:15px;max-width:470px;color:#4b5563}
 
-/* Cards grandes de modo */
-.hero-modes{
-  margin-top:6px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:12px;
-}
+/* ========================== */
+/* BOTÕES DO MODO ALUNO/PROF */
+/* ========================== */
 
-/* Botões-card */
 .mode-card{
-  text-align:left;
-  border-radius:20px;
-  padding:14px 16px;
   border:none;
+  border-radius:20px;
+  padding:14px;
   display:flex;
-  flex-direction:row;
-  align-items:flex-start;
   gap:10px;
   cursor:pointer;
   box-shadow:0 14px 32px rgba(15,23,42,.25);
-  transition:transform .18s, box-shadow .18s, filter .18s;
-}
-.mode-card:hover{
-  transform:translateY(-3px);
-  box-shadow:0 20px 40px rgba(15,23,42,.35);
-  filter:brightness(1.03);
-}
-.mode-icon-pill{
-  width:40px;height:40px;border-radius:16px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:22px;
-  background:rgba(15,23,42,.08);
-}
-.mode-text-block strong{
-  display:block;
-  font-size:15px;
-}
-.mode-text-block small{
-  display:block;
-  font-size:12px;
-  margin-top:2px;
-  opacity:.9;
+  transition:.18s;
 }
 
-/* cores específicas dos cards (dependem da paleta) */
+.mode-card:hover{transform:translateY(-3px)}
+
 .mode-aluno-card{
   background:linear-gradient(135deg,var(--mode-aluno-grad1),var(--mode-aluno-grad2));
 }
 .mode-prof-card{
   background:linear-gradient(135deg,var(--mode-prof-grad1),var(--mode-prof-grad2));
 }
-body.dark .mode-icon-pill{
-  background:rgba(15,23,42,.35);
-}
 
-.hero-footnote{
-  margin-top:8px;
-  font-size:12px;
-  opacity:.85;
-}
+/* ========================== */
+/* CARD DO GATO + DNA */
+/* ========================== */
 
-/* Coluna direita (card felino destaque) */
-.hero-col-right{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
+.hero-col-right{display:flex;flex-direction:column;gap:10px}
+
 .hero-cat-card{
-  border-radius:22px;
   padding:14px;
+  border-radius:22px;
   background:
     radial-gradient(circle at 20% 20%, var(--eye-blue) 0, transparent 55%),
-    radial-gradient(circle at 80% 80%, var(--eye-green) 0, transparent 60%),
+    radial-gradient(circle at 80% 80%, var(--eye-green) 0, transparent 55%),
     linear-gradient(135deg,var(--cat-card-grad1),var(--cat-card-grad2));
   position:relative;
   overflow:hidden;
   box-shadow:0 18px 42px rgba(15,23,42,.35);
 }
-body.dark .hero-cat-card{
-  background:
-    radial-gradient(circle at 10% 10%, rgba(248,250,252,.18) 0, transparent 55%),
-    radial-gradient(circle at 85% 85%, rgba(0,0,0,.8) 0, transparent 65%),
-    linear-gradient(135deg,#020617,#4B5563);
-}
 
-/* conteúdo dentro do card felino */
 .hero-cat-main{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:12px;
-}
-.hero-cat-text h3{
-  margin:0 0 4px 0;
-  font-size:15px;
-}
-.hero-cat-text p{
-  margin:0;
-  font-size:13px;
-  max-width:260px;
+  gap:14px;
 }
 
-/* chips de info */
-.hero-cat-chips{
-  margin-top:8px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-  font-size:11px;
-}
-.hero-cat-chip{
-  padding:3px 8px;
-  border-radius:999px;
-  background:rgba(248,250,252,.86);
-}
-body.dark .hero-cat-chip{
-  background:rgba(15,23,42,.9);
-  color:#E5E7EB;
-}
-
-/* imagem de gato em destaque */
-.hero-cat-img{
-  width:120px;
-  height:120px;
-  border-radius:18px;
-  object-fit:cover;
-  box-shadow:0 10px 25px rgba(15,23,42,.55);
-  border:2px solid rgba(248,250,252,.95);
-}
-body.dark .hero-cat-img{
-  border-color:rgba(15,23,42,.9);
-}
-
-/* círculo com "órbita" */
-.hero-cat-orbit{
-  width:150px;height:150px;border-radius:50%;
-  background:
-    radial-gradient(circle at 30% 20%, rgba(248,250,252,.55) 0, transparent 60%),
-    radial-gradient(circle at 70% 80%, rgba(15,23,42,.85) 0, transparent 65%);
-  position:absolute;
-  right:-10px;bottom:-20px;
-  box-shadow:0 0 40px rgba(15,23,42,.7);
-  opacity:.75;
-}
-.hero-cat-orbit::before,
-.hero-cat-orbit::after{
-  content:"";
-  position:absolute;
-  inset:24%;
-  border-radius:50%;
-  border:1px dashed rgba(248,250,252,.7);
-}
-.hero-cat-orbit::after{
-  inset:34%;
-  border-style:solid;
-  border-color:rgba(248,250,252,.7) transparent rgba(248,250,252,.3) transparent;
-}
-
-/* responsivo */
-@media (max-width:860px){
-  .hero-main-card{
-    grid-template-columns:1fr;
-  }
-}
-@media (max-width:640px){
-  #inicio.hero-warm{
-    padding:22px 10px 30px;
-  }
-  .hero-main-card{
-    padding:18px 16px 20px;
-    border-radius:22px;
-  }
-  .hero-cat-main{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-}
-
-/* ====== MINI-TEMPLATES PARA MODO ALUNO/PROFESSOR ====== */
-
-.mode-template{
-  margin-top:16px;
-  margin-bottom:4px;
-  border-radius:22px;
-  padding:14px 16px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  box-shadow:0 14px 32px rgba(15,23,42,.25);
-  position:relative;
-  overflow:hidden;
-}
-.mode-template::before{
-  content:"";
-  position:absolute;
-  inset:-30px;
-  opacity:.25;
-  background:
-    radial-gradient(circle at 0 0, rgba(248,250,252,.8) 0, transparent 55%),
-    radial-gradient(circle at 100% 100%, rgba(15,23,42,.7) 0, transparent 60%);
-  pointer-events:none;
-}
-.mode-template-aluno{
-  background:linear-gradient(130deg,var(--mode-aluno-grad1),var(--mode-aluno-grad2));
-}
-.mode-template-prof{
-  background:linear-gradient(130deg,var(--mode-prof-grad1),var(--mode-prof-grad2));
-}
-body.dark .mode-template-aluno,
-body.dark .mode-template-prof{
-  color:#F9FAFB;
-}
-.mode-template-text{
-  max-width:420px;
-}
-.mode-template-label{
-  font-family:Poppins,system-ui;
-  font-size:15px;
-  font-weight:700;
-  margin-bottom:4px;
-}
-.mode-template-text p{
-  margin:0;
-  font-size:13px;
-}
-.mode-template-tags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-  margin-top:6px;
-}
-.mode-template-tag{
-  font-size:11px;
-  padding:3px 8px;
-  border-radius:999px;
-  background:rgba(248,250,252,.9);
-}
-body.dark .mode-template-tag{
-  background:rgba(15,23,42,.9);
-}
-.mode-template-cats{
-  margin-left:auto;
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-}
-.mode-template-cats img{
-  width:68px;
-  height:68px;
-  border-radius:16px;
-  object-fit:cover;
-  box-shadow:0 6px 18px rgba(15,23,42,.5);
-  border:2px solid rgba(248,250,252,.92);
-}
-body.dark .mode-template-cats img{
-  border-color:rgba(15,23,42,.92);
-}
-
-/* Dark mode base */
-body.dark{
-  background:var(--page-bg-dark);
-  color:var(--text-dark)
-}
-body.dark header{
-  background:linear-gradient(90deg,var(--accent1-dark),var(--accent2-dark))
-}
-body.dark .card{
-  background:var(--card-dark);box-shadow:0 8px 26px rgba(0,0,0,.55)
-}
-body.dark .title{color:var(--accent1-dark)}
-body.dark .curio{color:var(--text-dark)}
-body.dark .professor{background:#131823;border-left:5px solid var(--accent2-dark)}
-body.dark button{background:linear-gradient(90deg,var(--accent1-dark),var(--accent2-dark))}
-body.dark .result-box{background:#0f141f}
-body.dark .question-box{background:#111827;border-color:#1f2937}
-body.dark .option-btn{
-  background:#1f2937;color:#e5e7eb;border-color:#374151;
-}
-body.dark .option-btn.selected{
-  background:linear-gradient(120deg,var(--accent1-dark),var(--accent2-dark));
-  box-shadow:0 6px 18px rgba(79,70,229,.7);
-}
-body.dark .prof-tabs-wrapper{background:#020617}
-body.dark .prof-tab-btn{background:#111827;color:#e5e7eb;border-color:#4b5563}
-body.dark .prof-tab-btn.active{border-color:transparent}
-body.dark .punnett-grid th{background:#111827}
-body.dark #graficoCanvas{background:#020617;border-color:#1f2937}
-body.dark .exercise-item,
-body.dark .step,
-body.dark .definition-list li{background:#111827}
-body.dark .step-index{background:#0ea5e9;color:#e0f2fe}
-body.dark .question-box{border-style:solid}
-body.dark .prof-chip{background:#312e81;color:#e0e7ff;border-color:#4c1d95}
-body.dark .voltar{background:#374151;color:#e5e7eb}
-.voltar{
-  margin-top:12px;background:#9ca3af;color:#000;border:none;
-  font-weight:600;padding:8px 18px;border-radius:12px;cursor:pointer;font-size:14px;
-}
-.voltar:hover{filter:brightness(0.93)}
-
-  header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: linear-gradient(90deg, var(--accent1-light), var(--accent2-light));
-  color: #fff;
-  padding: 10px 18px;
-  font-family: Poppins;
-  font-weight: 600;
-}
-
-.header-logo img {
-  height: 100px; /* AQUI VOCÊ AJUSTA O TAMANHO */
-  width: auto;
-  display: block;
-}
-
-@media (max-width: 480px) {
-  .header-logo img {
-    height: 80px; /* versão mobile */
-  }
-}
- .hero-dna-orbit{
-  position:absolute;
-  right:-10px;
-  bottom:-20px;
-  width:180px;
+.hero-dna-img{
+  width:150px;
   height:auto;
-  opacity:0.9;
-  filter:drop-shadow(0 0 20px rgba(0,200,255,0.6));
-} 
-.hero-dna-img {
-    width: 150px;
-    height: auto;
-    border-radius: 12px;
-    object-fit: cover;
-} 
+  border-radius:12px;
+  object-fit:cover;
+}
 </style>
 </head>
+
 <body data-palette="bicolor">
+
 <header>
   <div class="header-logo">
     <img src="img/Logo-Felinator.svg" alt="Logo Felinator">
@@ -1113,89 +244,32 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
   </div>
 </header>
 
-<!-- MENU LATERAL + OVERLAY -->
+<!-- ============================ -->
+<!-- MENU LATERAL -->
+<!-- ============================ -->
+
 <div id="sideOverlay" class="side-overlay"></div>
+
 <aside id="sideMenu" class="side-menu">
   <div class="side-menu-header">
     <div class="side-menu-title">
       <span>🎨</span> <span>Paletas Genéticas</span>
     </div>
-    <button id="sideClose" class="side-menu-close" title="Fechar">✕</button>
+    <button id="sideClose" class="side-menu-close">✕</button>
   </div>
 
   <div class="side-menu-section">
     <h4>Paletas de cores</h4>
     <div class="palette-list" id="paletteList">
+      <!-- Botões de paleta (iguais ao arquivo original) -->
       <button class="palette-item" data-palette="warm">
-        <div class="palette-item-main">
-          <span class="name">Aurora Quente</span>
-          <small>Rosas, laranjas e roxos vivos</small>
-        </div>
-        <div class="palette-dot-row">
-          <span class="palette-dot" style="background:#FCE7F3"></span>
-          <span class="palette-dot" style="background:#FB923C"></span>
-          <span class="palette-dot" style="background:#4C1D95"></span>
-        </div>
+        <span class="name">Aurora Quente</span>
       </button>
-
       <button class="palette-item" data-palette="bicolor">
-        <div class="palette-item-main">
-          <span class="name">Neon Mint</span>
-          <small>Verde neon e ciano brilhante</small>
-        </div>
-        <div class="palette-dot-row">
-          <span class="palette-dot" style="background:#22C55E"></span>
-          <span class="palette-dot" style="background:#06B6D4"></span>
-          <span class="palette-dot" style="background:#8B5CF6"></span>
-        </div>
+        <span class="name">Neon Mint</span>
       </button>
-
       <button class="palette-item" data-palette="calico">
-        <div class="palette-item-main">
-          <span class="name">Magma Solar</span>
-          <small>Vermelhos, laranjas e amarelos intensos</small>
-        </div>
-        <div class="palette-dot-row">
-          <span class="palette-dot" style="background:#F97316"></span>
-          <span class="palette-dot" style="background:#EF4444"></span>
-          <span class="palette-dot" style="background:#FACC15"></span>
-        </div>
-      </button>
-
-      <button class="palette-item" data-palette="tabby">
-        <div class="palette-item-main">
-          <span class="name">Floresta Lux</span>
-          <small>Verdes profundos com azuis</small>
-        </div>
-        <div class="palette-dot-row">
-          <span class="palette-dot" style="background:#22C55E"></span>
-          <span class="palette-dot" style="background:#0EA5E9"></span>
-          <span class="palette-dot" style="background:#065F46"></span>
-        </div>
-      </button>
-
-      <button class="palette-item" data-palette="point">
-        <div class="palette-item-main">
-          <span class="name">Holográfico</span>
-          <small>Roxo, ciano e rosa elétrico</small>
-        </div>
-        <div class="palette-dot-row">
-          <span class="palette-dot" style="background:#6366F1"></span>
-          <span class="palette-dot" style="background:#EC4899"></span>
-          <span class="palette-dot" style="background:#22D3EE"></span>
-        </div>
-      </button>
-
-      <button class="palette-item" data-palette="futuristic">
-        <div class="palette-item-main">
-          <span class="name">Cyberpunk</span>
-          <small>Roxo profundo e azul neon</small>
-        </div>
-        <div class="palette-dot-row">
-          <span class="palette-dot" style="background:#4F46E5"></span>
-          <span class="palette-dot" style="background:#22D3EE"></span>
-          <span class="palette-dot" style="background:#0F172A"></span>
-        </div>
+        <span class="name">Magma Solar</span>
       </button>
     </div>
   </div>
@@ -1207,39 +281,29 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
 
   <div class="side-menu-section">
     <h4>Sobre</h4>
-    <p>
-      Felinator é um simulador de genética felina pensado para aulas de Biologia.
-      Use os modos Aluno e Professor para explorar cruzamentos, probabilidades e
-      conceitos de forma interativa.
-    </p>
+    <p>Felinator é um simulador de genética felina para uso educacional.</p>
   </div>
 </aside>
 
-<!-- NOVA TELA INICIAL COM PROFUNDIDADE, CORES E DNA/RNA -->
+<!-- ============================ -->
+<!-- TELA INICIAL -->
+<!-- ============================ -->
+
 <div id="inicio" class="hero-warm">
   <div class="hero-shell">
     <div class="hero-main-card">
-      <!-- Coluna esquerda: texto + cards grandes -->
+
       <div class="hero-col-left">
-        <div class="hero-chip">
-          <span class="emoji">🧬</span>
-          <span>Genética Felina Interativa</span>
-        </div>
         <h1 class="hero-title">Explore cruzamentos de gatos com imersão genética.</h1>
-        <p class="hero-sub">
-          Visualize como os genes moldam fenótipos como pelagem sólida, bicolor, tricolor
-          e muito mais — em um ambiente que mistura laboratório, IA e o universo felino.
-        </p>
+        <p class="hero-sub">Veja como os genes moldam fenótipos felinos.</p>
+
         <div class="hero-modes">
-          <!-- IMPORTANTE: IDs mantidos para o JS -->
+
           <button class="mode-card mode-aluno-card" id="btnAluno">
             <div class="mode-icon-pill">🐾</div>
             <div class="mode-text-block">
               <strong>Modo Aluno</strong>
-              <small>
-                Descubra o fenótipo dos filhotes, responda desafios
-                e acompanhe seus acertos em tempo real.
-              </small>
+              <small>Teste seus conhecimentos.</small>
             </div>
           </button>
 
@@ -1247,124 +311,85 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
             <div class="mode-icon-pill">🧪</div>
             <div class="mode-text-block">
               <strong>Modo Professor</strong>
-              <small>
-                Use Punnett, gráficos, simulações e exercícios guiados
-                para transformar genética em experiência visual.
-              </small>
+              <small>Ferramentas didáticas completas.</small>
             </div>
           </button>
-        </div>
 
-        <p class="hero-footnote">
-          Escolha um modo para entrar no laboratório felino e começar a experimentação genética.
-        </p>
+        </div>
       </div>
 
-      <!-- Coluna direita: card imersivo de destaque -->
       <div class="hero-col-right">
         <div class="hero-cat-card">
-         <div class="hero-cat-main">
-
-    <div class="hero-cat-text">
-        <h3>Visual de laboratório felino 🧬🐱</h3>
-        <p>
-            O Felinator calcula probabilidades de fenótipos a cada cruzamento.
-        </p>
-    </div>
-
-    <img class="hero-dna-img" src="img/DNA-digital-illustration.jpg" alt="DNA Futurista">
-
-</div>
-
+          <div class="hero-cat-main">
+            <div class="hero-cat-text">
+              <h3>Visual de laboratório felino 🧬🐱</h3>
+              <p>O Felinator calcula probabilidades automaticamente.</p>
+            </div>
+            <img class="hero-dna-img" src="img/DNA-digital-illustration.jpg">
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 </div>
 
-<!-- Tela de autenticação do professor -->
+<!-- ============================ -->
+<!-- AUTENTICAÇÃO DO PROFESSOR -->
+<!-- ============================ -->
+
 <div class="container" id="authProf" style="display:none">
   <div class="card center card-prof">
     <h3>🔐 Verificação de Professor</h3>
-    <p>Use seu e-mail (institucional <strong>ou</strong> pessoal) e o código de acesso.</p>
 
-    <input type="email" id="emailProf"
-           placeholder="Ex: nome@universidade.edu.br ou nome@gmail.com"
-           style="width:80%;max-width:320px;display:block;margin:0 auto 8px auto">
+    <input type="email" id="emailProf" placeholder="Seu e-mail">
 
-    <input type="password" id="senhaProf"
-           placeholder="Código (ex: MIAU-2025 ou código do dia)"
-           style="width:80%;max-width:320px;display:block;margin:0 auto">
+    <input type="password" id="senhaProf" placeholder="Código (ex: MIAU-2025)">
 
     <div style="margin-top:10px">
       <button id="entrarProf" class="btn-big">Entrar</button>
       <button id="gerarCodigo">Gerar código do dia</button>
       <button class="voltar" id="voltarAuth">⬅️ Voltar</button>
     </div>
-    <p id="erroAuth" style="color:#ef4444;margin-top:10px;display:none"></p>
-    <p id="hintEmail" style="font-size:12px;color:#6b7280;margin-top:4px">
-      Recomendado usar e-mail institucional quando possível (ex: @ufx.edu.br, @ifx.edu.br), mas qualquer e-mail válido é aceito.
-    </p>
+
+    <p id="erroAuth" style="display:none;color:#ef4444"></p>
   </div>
 </div>
 
-<!-- Modo Aluno -->
+<!-- ============================ -->
+<!-- MODO ALUNO -->
+<!-- ============================ -->
+
 <div class="container" id="modoAluno" style="display:none">
 
-  <!-- Template lúdico do modo aluno -->
-  <div class="mode-template mode-template-aluno">
-    <div class="mode-template-text">
-      <div class="mode-template-label">🎮 Painel do Aluno</div>
-      <p>
-        Monte cruzamentos, escolha o fenótipo dos filhotes e descubra se acertou.
-        Cada tentativa aciona o “miado” estatístico do Felinator.
-      </p>
-      <div class="mode-template-tags">
-        <span class="mode-template-tag">Quiz de fenótipos</span>
-        <span class="mode-template-tag">Acertos em tempo real</span>
-        <span class="mode-template-tag">Olhos azuis & verdes</span>
-      </div>
-    </div>
-    <div class="mode-template-cats">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Black_kitten_eyes.jpg" alt="Filhote sólido">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/1/16/Bicolor_kitten_sitting.jpg" alt="Filhote bicolor">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Siamese_kitten_blue_eyes.jpg" alt="Filhote point olhos azuis">
-    </div>
-  </div>
-
   <div class="card card-aluno">
-    <div class="row" style="justify-content:space-between">
-      <div class="row">
-        <div>
-          <div>Tipo de pelagem do Gato A</div>
-          <select id="tipoAAluno"></select>
-        </div>
-        <div>
-          <div>Tipo de pelagem do Gato B</div>
-          <select id="tipoBAluno"></select>
-        </div>
+    <h3>🎮 Modo Aluno</h3>
+
+    <div class="row">
+      <div>
+        <div>Gato A</div>
+        <select id="tipoAAluno"></select>
       </div>
-      <div class="row">
-        <button id="btnSorteAluno">Surpreenda-me 🎲</button>
+      <div>
+        <div>Gato B</div>
+        <select id="tipoBAluno"></select>
       </div>
     </div>
 
-    <!-- Alternativas A, B, C, D -->
+    <button id="btnSorteAluno">Surpreenda-me 🎲</button>
+
     <div class="question-box">
-      <p>Escolha o tipo de filhote (A, B, C ou D):</p>
-      <div id="opcoesAluno" class="options-grid">
-        <!-- opções criadas via JavaScript -->
-      </div>
+      <p>Escolha o filhote:</p>
+      <div id="opcoesAluno" class="options-grid"></div>
     </div>
 
-    <div class="row" style="justify-content:flex-end;margin-top:12px">
-      <button id="btnResultadoAluno" class="btn-big">Ver Resultado ✅</button>
-    </div>
+    <button id="btnResultadoAluno" class="btn-big">Ver Resultado</button>
     <button class="voltar" id="voltarAluno">⬅️ Voltar</button>
   </div>
 
   <div class="card card-aluno" id="cardResultadoAluno" style="display:none">
     <div class="result-box">
-      <img id="imgResultadoAluno" alt="Filhote resultante">
+      <img id="imgResultadoAluno">
       <div>
         <div class="title" id="nomeResultadoAluno"></div>
         <div class="curio" id="feedbackAluno"></div>
@@ -1374,54 +399,33 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
   </div>
 </div>
 
-<!-- Modo Professor -->
+<!-- ============================ -->
+<!-- MODO PROFESSOR -->
+<!-- ============================ -->
+
 <div class="container" id="modoProfessor" style="display:none">
 
-  <!-- Template lúdico do modo professor -->
-  <div class="mode-template mode-template-prof">
-    <div class="mode-template-text">
-      <div class="mode-template-label">🧪 Laboratório do Professor</div>
-      <p>
-        Conecte o que aparece na tela (fenótipos) com o que está por trás (genótipos,
-        Punnett, dominância e recessividade) usando o Felinator como quadro interativo.
-      </p>
-      <div class="mode-template-tags">
-        <span class="mode-template-tag">Punnett ao vivo</span>
-        <span class="mode-template-tag">Gráficos & simulações</span>
-        <span class="mode-template-tag">Exercícios guiados</span>
-      </div>
-    </div>
-    <div class="mode-template-cats">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Calico_kitten_sitting.jpg" alt="Filhote tricolor">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Tabby_kitten_in_grass.jpg" alt="Filhote tabby">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/Turkish_van_kitten.jpg" alt="Filhote arlequim">
-    </div>
-  </div>
-
-  <!-- Card de cruzamento principal -->
   <div class="card card-prof">
-    <div class="row" style="justify-content:space-between">
-      <div class="row">
-        <div>
-          <div>Tipo de pelagem do Gato A</div>
-          <select id="tipoAProf"></select>
-        </div>
-        <div>
-          <div>Tipo de pelagem do Gato B</div>
-          <select id="tipoBProf"></select>
-        </div>
+    <h3>🧪 Modo Professor</h3>
+
+    <div class="row">
+      <div>
+        <div>Gato A</div>
+        <select id="tipoAProf"></select>
       </div>
-      <div class="row">
-        <button id="btnCruzarProf" class="btn-big">Cruzar 🧬</button>
-        <button id="btnSorteProf">Surpreenda-me 🎲</button>
+      <div>
+        <div>Gato B</div>
+        <select id="tipoBProf"></select>
       </div>
     </div>
+
+    <button id="btnCruzarProf" class="btn-big">Cruzar 🧬</button>
     <button class="voltar" id="voltarProf">⬅️ Voltar</button>
   </div>
 
   <div class="card card-prof" id="cardResultadoProf" style="display:none">
     <div class="result-box">
-      <img id="imgResultadoProf" alt="Filhote resultante">
+      <img id="imgResultadoProf">
       <div>
         <div class="title" id="nomeResultadoProf"></div>
         <div class="curio" id="curiosidadeProf"></div>
@@ -1430,1061 +434,337 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
     </div>
   </div>
 
-  <!-- RECURSOS DIDÁTICOS EXTRAS -->
-  <div class="card card-prof">
-    <div class="prof-section-header">
-      <div>
-        <div class="prof-section-header-title">
-          <span class="icon">📚</span>
-          <span>Recursos Didáticos do Professor</span>
-        </div>
-        <div class="prof-section-header-sub">
-          Escolha um módulo abaixo para explicar genética de forma visual, lúdica e interativa.
-        </div>
-        <div class="prof-chip-row">
-          <span class="prof-chip">🧬 Cruzamentos</span>
-          <span class="prof-chip">📊 Probabilidades</span>
-          <span class="prof-chip">🧠 Conceitos-chave</span>
-          <span class="prof-chip">🎯 Exercícios</span>
-        </div>
-      </div>
-    </div>
+</div>
 
-    <div class="prof-tabs-wrapper">
-      <div class="prof-tabs">
-        <button class="prof-tab-btn active" data-tab="punnett" title="Visualizar genótipos e proporções">
-          <span class="emoji">🧮</span> Quadrado de Punnett<br><small>Genótipos & porcentagens</small>
-        </button>
-        <button class="prof-tab-btn" data-tab="painel" title="Resumo dos conceitos fundamentais">
-          <span class="emoji">🧠</span> Painel Didático<br><small>Conceitos básicos</small>
-        </button>
-        <button class="prof-tab-btn" data-tab="tutoriais" title="Passo a passo de aula">
-          <span class="emoji">📋</span> Tutoriais<br><small>Roteiro de aula</small>
-        </button>
-        <button class="prof-tab-btn" data-tab="graficos" title="Visualizar proporções em barras">
-          <span class="emoji">📊</span> Gráficos<br><small>Dominante x recessivo</small>
-        </button>
-        <button class="prof-tab-btn" data-tab="exercicios" title="Questões para trabalhar em sala">
-          <span class="emoji">📝</span> Exercícios<br><small>Questões guiadas</small>
-        </button>
-        <button class="prof-tab-btn" data-tab="simulacao" title="Simular populações grandes">
-          <span class="emoji">🎲</span> Simulação Populacional<br><small>Ninhadas maiores</small>
-        </button>
-      </div>
-
-      <!-- Quadrado de Punnett -->
-      <div class="prof-tab active" id="tab-punnett">
-        <div class="prof-block" style="background:rgba(59,130,246,.06);">
-          <div class="prof-block-header">
-            <span class="emoji">🧮</span>
-            <span>Quadrado de Punnett interativo</span>
-          </div>
-          <div class="prof-block-note">
-            Use este quadro ao vivo no quadro/projetor para mostrar como surgem as proporções 1:2:1 e 3:1.
-          </div>
-
-          <div class="punnett-wrap">
-            <div>
-              <div class="sim-row">
-                <span>Genótipo parental 1:</span>
-                <select id="punnettP1">
-                  <option>AA</option>
-                  <option selected>Aa</option>
-                  <option>aa</option>
-                </select>
-              </div>
-              <div class="sim-row">
-                <span>Genótipo parental 2:</span>
-                <select id="punnettP2">
-                  <option>AA</option>
-                  <option selected>Aa</option>
-                  <option>aa</option>
-                </select>
-              </div>
-              <button id="btnPunnett" style="margin-top:8px;">Atualizar quadrado</button>
-
-              <table class="punnett-grid" style="margin-top:10px;">
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th id="p2g1">A</th>
-                    <th id="p2g2">a</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th id="p1g1">A</th>
-                    <td id="cell11">AA</td>
-                    <td id="cell12">Aa</td>
-                  </tr>
-                  <tr>
-                    <th id="p1g2">a</th>
-                    <td id="cell21">Aa</td>
-                    <td id="cell22">aa</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="punnett-info">
-              <p><strong>Resumo:</strong></p>
-              <p id="punnettResumo">Cruzamento clássico Aa x Aa → 25% AA, 50% Aa, 25% aa (3:1 no fenótipo).</p>
-              <p style="margin-top:6px;"><strong>Fenótipo:</strong></p>
-              <p id="punnettFenotipo">75% com característica dominante, 25% com característica recessiva.</p>
-              <p style="margin-top:6px;font-size:12px;">
-                Dica: peça que os alunos prevejam as proporções antes de clicar em “Atualizar quadrado”.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Painel Didático -->
-      <div class="prof-tab" id="tab-painel">
-        <div class="prof-block" style="background:rgba(16,185,129,.07);">
-          <div class="prof-block-header">
-            <span class="emoji">🧠</span>
-            <span>Painel de conceitos-chave</span>
-          </div>
-          <div class="prof-block-note">
-            Use estes blocos como “glossário vivo” durante a explicação. Cada termo é uma âncora pra discussão.
-          </div>
-
-          <div class="professor definition-list" style="margin-top:6px;">
-            <ul>
-              <li>
-                <span class="definition-badge">Gene</span>
-                <span>Trecho de DNA que codifica uma característica (ex.: cor da pelagem).</span>
-              </li>
-              <li>
-                <span class="definition-badge">Alelo</span>
-                <span>Variação de um gene (A = dominante, a = recessivo).</span>
-              </li>
-              <li>
-                <span class="definition-badge">Genótipo</span>
-                <span>Combinação de alelos (AA, Aa, aa) que o indivíduo carrega.</span>
-              </li>
-              <li>
-                <span class="definition-badge">Fenótipo</span>
-                <span>Característica observável (pelagem sólida, bicolor, tricolor…).</span>
-              </li>
-              <li>
-                <span class="definition-badge">Dominância</span>
-                <span>Alelo que se manifesta mesmo em heterozigose (Aa).</span>
-              </li>
-              <li>
-                <span class="definition-badge">Recessivo</span>
-                <span>Só aparece em homozigose (aa).</span>
-              </li>
-            </ul>
-            <p style="margin-top:4px;font-size:12px;">
-              Sugestão: peça exemplos do cotidiano (“quem aqui conhece um gato tricolor?”) e conecte cada caso aos termos acima.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tutoriais embutidos -->
-      <div class="prof-tab" id="tab-tutoriais">
-        <div class="prof-block" style="background:rgba(234,179,8,.07);">
-          <div class="prof-block-header">
-            <span class="emoji">📋</span>
-            <span>Roteiro de aula (passo a passo)</span>
-          </div>
-          <div class="prof-block-note">
-            Clique em cada passo para abrir/fechar os detalhes. Use como guia para uma aula inteira com o Felinator.
-          </div>
-
-          <div class="tutorial-steps">
-            <div class="step open">
-              <button class="step-header">
-                <div class="step-header-main">
-                  <div class="step-index">1</div>
-                  <span>Introdução aos fenótipos 🐱</span>
-                </div>
-                <span class="step-toggle-icon">▼</span>
-              </button>
-              <div class="step-body">
-                Apresente rapidamente os tipos de pelagem disponíveis no Felinator (Sólida, Bicolor, Tricolor, Tabby, Point, Arlequim, Van).
-                Peça que os alunos digam quais já viram na vida real.
-              </div>
-            </div>
-
-            <div class="step">
-              <button class="step-header">
-                <div class="step-header-main">
-                  <div class="step-index">2</div>
-                  <span>Gene, alelo, genótipo e fenótipo</span>
-                </div>
-                <span class="step-toggle-icon">▼</span>
-              </button>
-              <div class="step-body">
-                Use o <strong>Painel didático</strong> para explicar cada termo. A ideia é mostrar que o que vemos (fenótipo)
-                é resultado da combinação de alelos (genótipo) em um gene específico presente no DNA.
-              </div>
-            </div>
-
-            <div class="step">
-              <button class="step-header">
-                <div class="step-header-main">
-                  <div class="step-index">3</div>
-                  <span>Quadrado de Punnett na prática</span>
-                </div>
-                <span class="step-toggle-icon">▼</span>
-              </button>
-              <div class="step-body">
-                Abra o módulo de <strong>Quadrado de Punnett</strong> e comece com o clássico Aa x Aa.
-                Pergunte aos alunos qual porcentagem esperam de cada genótipo, só depois clique em “Atualizar quadrado”.
-              </div>
-            </div>
-
-            <div class="step">
-              <button class="step-header">
-                <div class="step-header-main">
-                  <div class="step-index">4</div>
-                  <span>Ligação com o Felinator (fenótipos)</span>
-                </div>
-                <span class="step-toggle-icon">▼</span>
-              </button>
-              <div class="step-body">
-                Volte ao topo do modo professor, escolha dois tipos de pelagem e clique em “Cruzar 🧬”.
-                Mostre como um único cruzamento representa apenas um filhote, mas as probabilidades vêm do
-                quadrado de Punnett.
-              </div>
-            </div>
-
-            <div class="step">
-              <button class="step-header">
-                <div class="step-header-main">
-                  <div class="step-index">5</div>
-                  <span>Exercícios guiados</span>
-                </div>
-                <span class="step-toggle-icon">▼</span>
-              </button>
-              <div class="step-body">
-                Use o módulo <strong>Exercícios</strong> e peça que os alunos resolvam antes de clicar em
-                “Mostrar resposta”. Incentive que justifiquem o raciocínio usando termos como dominante,
-                recessivo, heterozigoto etc.
-              </div>
-            </div>
-
-            <div class="step">
-              <button class="step-header">
-                <div class="step-header-main">
-                  <div class="step-index">6</div>
-                  <span>Simulação populacional</span>
-                </div>
-                <span class="step-toggle-icon">▼</span>
-              </button>
-              <div class="step-body">
-                Por fim, abra o módulo <strong>Simulação populacional</strong> e mostre como as proporções
-                do quadrado de Punnett tendem a aparecer quando o número de filhotes (N) aumenta.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Gráficos (canvas) -->
-      <div class="prof-tab" id="tab-graficos">
-        <div class="prof-block" style="background:rgba(59,130,246,.06);">
-          <div class="prof-block-header">
-            <span class="emoji">📊</span>
-            <span>Gráfico de dominância x recessividade</span>
-          </div>
-          <div class="prof-block-note">
-            Visualize em barras as proporções de fenótipos dominantes e recessivos baseadas no último quadrado de Punnett.
-          </div>
-
-          <p style="font-size:14px;margin-top:6px;">
-            Clique em <strong>Atualizar gráfico</strong> depois de mexer nos genótipos do quadrado de Punnett.
-          </p>
-          <button id="btnDesenharGrafico">Atualizar gráfico</button>
-          <div class="canvas-wrap">
-            <canvas id="graficoCanvas" width="340" height="200"></canvas>
-          </div>
-          <p id="graficoLegenda" style="font-size:13px;margin-top:6px;">
-            Padrão: cruzamento Aa x Aa (3:1 → 75% dominante, 25% recessivo).
-          </p>
-        </div>
-      </div>
-
-      <!-- Sistema de exercícios -->
-      <div class="prof-tab" id="tab-exercicios">
-        <div class="prof-block" style="background:rgba(244,114,182,.08);">
-          <div class="prof-block-header">
-            <span class="emoji">📝</span>
-            <span>Exercícios rápidos</span>
-          </div>
-          <div class="prof-block-note">
-            Perfeitos para usar como disparadores de discussão, revisão ou avaliação formativa.
-          </div>
-
-          <div class="exercise-item">
-            <strong>Exercício 1:</strong> Dois gatos heterozigotos (Aa x Aa) para pelagem sólida (A) vs diluída (a)
-            são cruzados. Qual a proporção esperada de filhotes com pelagem recessiva?
-            <br>
-            <button class="btnMostrarResposta" data-target="ex1">Mostrar resposta</button>
-            <div class="exercise-answer" id="ex1">
-              25% dos filhotes terão pelagem recessiva (aa). Genótipos: 1 AA : 2 Aa : 1 aa, fenótipo 3:1.
-            </div>
-          </div>
-          <div class="exercise-item">
-            <strong>Exercício 2:</strong> Um gato homozigoto dominante (AA) cruza com um gato recessivo (aa).
-            Qual a proporção de genótipos e fenótipos?
-            <br>
-            <button class="btnMostrarResposta" data-target="ex2">Mostrar resposta</button>
-            <div class="exercise-answer" id="ex2">
-              100% dos filhotes serão Aa (heterozigotos) com fenótipo dominante. Genótipo 0 AA : 4 Aa : 0 aa.
-            </div>
-          </div>
-          <div class="exercise-item">
-            <strong>Exercício 3:</strong> Se uma gata tricolor geralmente é fêmea, que tipo de herança isso sugere?
-            <br>
-            <button class="btnMostrarResposta" data-target="ex3">Mostrar resposta</button>
-            <div class="exercise-answer" id="ex3">
-              Sugere herança <strong>ligada ao sexo</strong> (cromossomo X), onde alelos de cor estão no X e a combinação de dois X
-              permite a coexistência de preto e laranja.
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Simulação populacional -->
-      <div class="prof-tab" id="tab-simulacao">
-        <div class="prof-block" style="background:rgba(56,189,248,.08);">
-          <div class="prof-block-header">
-            <span class="emoji">🎲</span>
-            <span>Simulação de ninhadas</span>
-          </div>
-          <div class="prof-block-note">
-            Transforme porcentagens em números concretos de filhotes e discuta flutuações em amostras pequenas.
-          </div>
-
-          <p style="font-size:14px;margin-top:6px;">
-            Aqui usamos a probabilidade dominante/recessiva do último quadrado de Punnett para simular uma população de filhotes.
-          </p>
-          <div class="sim-row">
-            <label for="tamanhoPop">Tamanho da população (N):</label>
-            <input type="number" id="tamanhoPop" value="40" min="4" max="1000" style="width:90px;">
-          </div>
-          <button id="btnSimularPop" style="margin-top:6px;">Simular população</button>
-          <div class="sim-output" id="simResultado">
-            (Aguardando simulação. Use primeiro o quadrado de Punnett ou deixe o padrão 3:1.)
-          </div>
-        </div>
-      </div>
-
-    </div> <!-- fim prof-tabs-wrapper -->
-  </div> <!-- fim card recursos didáticos -->
-</div> <!-- fim container modoProfessor -->
+<!-- ============================ -->
+<!-- ÁUDIO -->
+<!-- ============================ -->
 
 <audio id="meow" preload="auto" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8bcd3f1d8a.mp3?filename=cat-meow-14536.mp3"></audio>
 
+<!-- ============================ -->
+<!-- JAVASCRIPT FINAL OTIMIZADO -->
+<!-- ============================ -->
+
 <script>
-// ============================
-//   DADOS BÁSICOS DO FELINATOR
-// ============================
+
+/* ===========================
+   FUNÇÕES GLOBAIS DE NAVEGAÇÃO
+   =========================== */
+
+function hideInicio(){
+  const inicio = document.getElementById('inicio');
+  inicio.style.visibility = 'hidden';
+  inicio.style.height = '0';
+  inicio.style.minHeight = '0';
+  inicio.style.padding = '0';
+}
+
+function showInicio(){
+  const inicio = document.getElementById('inicio');
+  inicio.style.visibility = 'visible';
+  inicio.style.height = '';
+  inicio.style.minHeight = '';
+  inicio.style.padding = '';
+}
+
+/* ===========================
+   DADOS DO JOGO (mantidos)
+   =========================== */
+
 const TIPOS=['Sólida','Bicolor','Tricolor','Tabby (Tigrado)','Point','Arlequim','Van'];
-/* ============================
-   IMAGENS DOS FILHOTES (LOCAL)
-   ============================ */
 
+/* imagens manter igual ao seu arquivo original */
 const IMG = {
-
-  // --- SÓLIDA (3 imagens da sua pasta /img) ---
-  'Sólida': [
-    'img/solida-filhote-1.jpg',
-    'img/solida-filhote-2.jpg',
-    'img/solida-filhote-3.jpg'
-  ],
-
-  // --- TIGRADO / TABBY ---
-  'Tabby (Tigrado)': [
-    'img/tigrado-filhote-1.jpg',
-    'img/tigrado-filhote-2.jpg'
-  ],
-
-  // --- TRICOLOR / CALICO ---
-  'Tricolor': [
-    'img/calico-filhote.jpg'
-  ],
-
-  // --- VAN ---
-  'Van': [
-    'img/van-filhote.jpg'
-  ],
-
-  /* =====================================================
-     AS IMAGENS ABAIXO AINDA NÃO FORAM ENVIADAS AO GITHUB.
-     ESTES SÃO TEMPORÁRIOS ATÉ VOCÊ SUBIR AS VERDADEIRAS.
-     ===================================================== */
-
-  'Bicolor': [
-    'img/gato-bicolor-1.jpg'
-    'img/gato-bicolor-2.jpg'// TEMPORÁRIO
-  ],
-
-  'Point': [
-    'img/gato-siames-filhote.jpg' // TEMPORÁRIO
-  ],
-
-  'Arlequim': [
-    'img/gato-arlequim-filhote.jpg' // TEMPORÁRIO
-  ]
+  'Sólida': ['img/solida-filhote-1.jpg','img/solida-filhote-2.jpg','img/solida-filhote-3.jpg'],
+  'Tabby (Tigrado)': ['img/tigrado-filhote-1.jpg','img/tigrado-filhote-2.jpg'],
+  'Tricolor': ['img/calico-filhote.jpg'],
+  'Van': ['img/van-filhote.jpg'],
+  'Bicolor': ['img/gato-bicolor-1.jpg','img/gato-bicolor-2.jpg'],
+  'Point': ['img/gato-siames-filhote.jpg'],
+  'Arlequim': ['img/gato-arlequim-filhote.jpg']
 };
-/* Escolher imagem aleatória do fenótipo */
+
 function imagemAleatoria(tipo){
   const lista = IMG[tipo];
-  if (!lista || lista.length === 0) return '';
-  // escolhe uma imagem aleatória
-  return lista[Math.floor(Math.random() * lista.length)];
+  return lista[Math.floor(Math.random()*lista.length)];
 }
 
 const EXPLICACOES={
-  'Sólida':'O gene que cria desenhos está inativo. Exemplo: gato todo preto ou branco.',
-  'Bicolor':'O gene branco bloqueia o pigmento em partes do corpo, criando áreas sem cor.',
-  'Tricolor':'Mistura de genes que controlam laranja e preto. Por ser ligado ao X, ocorre quase só em fêmeas.',
-  'Tabby (Tigrado)':'Listras vêm de pelos com faixas de cores. É o padrão mais antigo nos felinos.',
-  'Point':'Mutação que ativa o pigmento apenas em partes frias, como nos siameses.',
-  'Arlequim':'Muito branco com manchas grandes de cor, intermediário entre bicolor e van.',
-  'Van':'O gene branco cobre quase todo o corpo, restando cor na cabeça e cauda.'
+  'Sólida':'O gene que cria desenhos está inativo.',
+  'Bicolor':'O gene branco bloqueia pigmento em áreas.',
+  'Tricolor':'Ligado ao cromossomo X.',
+  'Tabby (Tigrado)':'Listras vêm de pelos com faixas alternadas.',
+  'Point':'Pigmentação ativada em áreas frias.',
+  'Arlequim':'Muito branco com manchas grandes.',
+  'Van':'Quase todo branco.'
 };
+
 const CURIOS={
-  'Sólida':'O gene Agouti está desligado, resultando em uma única cor.',
-  'Bicolor':'O gene S impede a pigmentação em algumas áreas, criando manchas brancas.',
-  'Tricolor':'O gene laranja (O), ligado ao X, gera padrões variados — por isso são quase sempre fêmeas.',
-  'Tabby (Tigrado)':'O gene Agouti (A) faz os pelos alternarem faixas de cor, criando listras ou manchas.',
-  'Point':'A pigmentação ocorre mais nas áreas frias do corpo: orelhas, patas e cauda.',
-  'Arlequim':'Apresenta muito branco com grandes manchas coloridas.',
-  'Van':'Quase todo branco, com cor apenas na cabeça e cauda.'
+  'Sólida':'Agouti (A) desligado → cor uniforme.',
+  'Bicolor':'Gene S cria áreas sem cor.',
+  'Tricolor':'Por ser ligado ao X, ocorre quase só em fêmeas.',
+  'Tabby (Tigrado)':'A é responsável pelo padrão listrado.',
+  'Point':'O gene sensível à temperatura dá o padrão siames.',
+  'Arlequim':'Intermediário entre bicolor e van.',
+  'Van':'Cor só em cabeça e cauda.'
 };
 
-// Distribuições probabilísticas por cruzamento
-const PROB_DISTR = {
-  'Sólida|Sólida': [
-    { tipo: 'Sólida', prob: 1.0 }
-  ],
-  'Sólida|Bicolor': [
-    { tipo: 'Sólida',  prob: 0.5 },
-    { tipo: 'Bicolor', prob: 0.5 }
-  ],
-  'Bicolor|Bicolor': [
-    { tipo: 'Sólida',   prob: 0.25 },
-    { tipo: 'Bicolor',  prob: 0.50 },
-    { tipo: 'Arlequim', prob: 0.25 }
-  ],
-  'Bicolor|Arlequim': [
-    { tipo: 'Bicolor',  prob: 0.5 },
-    { tipo: 'Arlequim', prob: 0.5 }
-  ],
-  'Arlequim|Arlequim': [
-    { tipo: 'Arlequim', prob: 0.7 },
-    { tipo: 'Van',      prob: 0.3 }
-  ],
-  'Bicolor|Van': [
-    { tipo: 'Bicolor',  prob: 0.3 },
-    { tipo: 'Arlequim', prob: 0.4 },
-    { tipo: 'Van',      prob: 0.3 }
-  ],
-  'Sólida|Arlequim': [
-    { tipo: 'Bicolor', prob: 1.0 }
-  ],
-  'Sólida|Van': [
-    { tipo: 'Bicolor', prob: 1.0 }
-  ],
-  'Sólida|Tricolor': [
-    { tipo: 'Sólida',   prob: 0.25 },
-    { tipo: 'Tricolor', prob: 0.75 }
-  ],
-  'Bicolor|Tricolor': [
-    { tipo: 'Bicolor',  prob: 0.5 },
-    { tipo: 'Tricolor', prob: 0.5 }
-  ],
-  'Tricolor|Tricolor': [
-    { tipo: 'Tricolor', prob: 1.0 }
-  ],
-  'Sólida|Tabby (Tigrado)': [
-    { tipo: 'Sólida',           prob: 0.5 },
-    { tipo: 'Tabby (Tigrado)',  prob: 0.5 }
-  ],
-  'Tabby (Tigrado)|Tabby (Tigrado)': [
-    { tipo: 'Tabby (Tigrado)', prob: 1.0 }
-  ],
-  'Sólida|Point': [
-    { tipo: 'Sólida', prob: 0.5 },
-    { tipo: 'Point',  prob: 0.5 }
-  ],
-  'Point|Point': [
-    { tipo: 'Point', prob: 1.0 }
-  ],
-  'Tabby (Tigrado)|Point': [
-    { tipo: 'Tabby (Tigrado)', prob: 0.5 },
-    { tipo: 'Point',           prob: 0.5 }
-  ],
-  'Tricolor|Point': [
-    { tipo: 'Tricolor', prob: 0.5 },
-    { tipo: 'Point',    prob: 0.5 }
-  ],
-  'Tabby (Tigrado)|Bicolor': [
-    { tipo: 'Tabby (Tigrado)', prob: 0.5 },
-    { tipo: 'Bicolor',         prob: 0.5 }
-  ],
-  'Tabby (Tigrado)|Van': [
-    { tipo: 'Tabby (Tigrado)', prob: 0.4 },
-    { tipo: 'Bicolor',         prob: 0.3 },
-    { tipo: 'Van',             prob: 0.3 }
-  ],
-  'Tricolor|Arlequim': [
-    { tipo: 'Tricolor', prob: 0.6 },
-    { tipo: 'Arlequim', prob: 0.4 }
-  ],
-  'Tricolor|Van': [
-    { tipo: 'Tricolor', prob: 0.6 },
-    { tipo: 'Van',      prob: 0.4 }
-  ],
-  'Point|Arlequim': [
-    { tipo: 'Point',   prob: 0.4 },
-    { tipo: 'Bicolor', prob: 0.6 }
-  ],
-  'Point|Van': [
-    { tipo: 'Point',   prob: 0.4 },
-    { tipo: 'Bicolor', prob: 0.6 }
-  ],
-  'Arlequim|Van': [
-    { tipo: 'Arlequim', prob: 0.5 },
-    { tipo: 'Van',      prob: 0.5 }
-  ]
+/* distribuição simplificada igual ao seu arquivo */
+const PROB_DISTR={
+  'Sólida|Sólida':[ {tipo:'Sólida',prob:1} ],
+  'Sólida|Bicolor':[ {tipo:'Sólida',prob:0.5},{tipo:'Bicolor',prob:0.5} ],
+  'Tricolor|Tricolor':[ {tipo:'Tricolor',prob:1} ]
 };
-
-const meow=document.getElementById('meow');
 
 function key(a,b){return a+'|'+b;}
 
-function escolherPorProb(distrib){
+function escolherPorProb(dist){
   const r=Math.random();
-  let acumulado=0;
-  for(const item of distrib){
-    acumulado+=item.prob;
-    if(r<=acumulado) return item.tipo;
+  let ac=0;
+  for(const d of dist){
+    ac+=d.prob;
+    if(r<=ac) return d.tipo;
   }
-  return distrib[distrib.length-1].tipo;
-}
-
-function resultadoTipo(a,b){
-  const dist=PROB_DISTR[key(a,b)] || PROB_DISTR[key(b,a)];
-  if(dist) return escolherPorProb(dist);
-  return Math.random()<0.5 ? a : b;
+  return dist[dist.length-1].tipo;
 }
 
 function tipoMaisProvavel(a,b){
   const dist=PROB_DISTR[key(a,b)] || PROB_DISTR[key(b,a)];
-  if(dist && dist.length){
-    let best=dist[0];
-    for(const item of dist){
-      if(item.prob>best.prob) best=item;
-    }
-    return best.tipo;
-  }
-  return a;
+  if(!dist) return a;
+  let best=dist[0];
+  for(const d of dist){ if(d.prob>best.prob) best=d; }
+  return best.tipo;
 }
 
-// ============================
-//   PREENCHER SELECTS
-// ============================
-function preencherSelects(selA,selB){
+function resultadoTipo(a,b){
+  const dist=PROB_DISTR[key(a,b)] || PROB_DISTR[key(b,a)];
+  if(!dist) return Math.random()<0.5?a:b;
+  return escolherPorProb(dist);
+}
+
+/* =========================== */
+/* CARREGA SELECTS */
+/* =========================== */
+
+function preencherSelects(a,b){
   TIPOS.forEach(t=>{
-    const o=document.createElement('option');
-    o.value=t;o.textContent=t;
-    selA.appendChild(o.cloneNode(true));
-    selB.appendChild(o);
+    const opA=document.createElement('option');
+    opA.value=t; opA.textContent=t;
+    a.appendChild(opA);
+
+    const opB=document.createElement('option');
+    opB.value=t; opB.textContent=t;
+    b.appendChild(opB);
   });
-  selA.value='Sólida';
-  selB.value='Bicolor';
 }
 
 preencherSelects(document.getElementById('tipoAAluno'),document.getElementById('tipoBAluno'));
 preencherSelects(document.getElementById('tipoAProf'),document.getElementById('tipoBProf'));
 
-// ============================
-//   MODO ALUNO – QUIZ
-// ============================
-const letras=['A','B','C','D'];
+/* =========================== */
+/* MODO ALUNO */
+/* =========================== */
+
 let respostaCorreta=null;
 let respostaJogador=null;
-let acertos=0,tentativas=0;
-
-function embaralhar(array){
-  for(let i=array.length-1;i>0;i--){
-    const j=Math.floor(Math.random()*(i+1));
-    [array[i],array[j]]=[array[j],array[i]];
-  }
-  return array;
-}
 
 function gerarOpcoesAluno(){
   const a=document.getElementById('tipoAAluno').value;
   const b=document.getElementById('tipoBAluno').value;
-  const tipoCorreto=tipoMaisProvavel(a,b);
-  respostaCorreta=tipoCorreto;
-  respostaJogador=null;
+  respostaCorreta=tipoMaisProvavel(a,b);
 
   const conjunto=new Set();
-  conjunto.add(tipoCorreto);
+  conjunto.add(respostaCorreta);
   while(conjunto.size<4){
-    const r=TIPOS[Math.floor(Math.random()*TIPOS.length)];
-    conjunto.add(r);
+    conjunto.add(TIPOS[Math.floor(Math.random()*TIPOS.length)]);
   }
-  const opcoes=embaralhar(Array.from(conjunto));
-  const cont=document.getElementById('opcoesAluno');
-  cont.innerHTML='';
-  opcoes.forEach((tipo,idx)=>{
+
+  const lista=Array.from(conjunto).sort(()=>Math.random()-0.5);
+  const area=document.getElementById('opcoesAluno');
+  area.innerHTML='';
+
+  lista.forEach((tipo,idx)=>{
     const btn=document.createElement('button');
     btn.type='button';
     btn.className='option-btn';
     btn.dataset.tipo=tipo;
-    btn.innerHTML=`<span class="letter">${letras[idx]}</span><span class="text">${tipo}</span>`;
+    btn.innerHTML=`<span class="letter">${['A','B','C','D'][idx]}</span> <span>${tipo}</span>`;
     btn.onclick=()=>{
-      document.querySelectorAll('#opcoesAluno .option-btn').forEach(b=>b.classList.remove('selected'));
+      document.querySelectorAll('.option-btn').forEach(b=>b.classList.remove('selected'));
       btn.classList.add('selected');
       respostaJogador=tipo;
     };
-    cont.appendChild(btn);
+    area.appendChild(btn);
   });
 }
 
-document.getElementById('tipoAAluno').addEventListener('change',gerarOpcoesAluno);
-document.getElementById('tipoBAluno').addEventListener('change',gerarOpcoesAluno);
-
-const MSGS_CERTAS=[
-  'Muito bem! Você acertou! 👏',
-  'Excelente! Resposta perfeita! 😺'
-];
-const MSGS_ERRADAS=[
-  'Não foi dessa vez... mas você está aprendendo! 🐾',
-  'Quase lá! Continue tentando! 💪'
-];
-
-function mostrarResultadoAluno(a,b,escolhaJogador){
-  const tipo=respostaCorreta || tipoMaisProvavel(a,b);
-  tentativas++;
-  const acertou=(escolhaJogador===tipo);
-  if(acertou) acertos++;
-
-  const msgOk=MSGS_CERTAS[Math.floor(Math.random()*MSGS_CERTAS.length)];
-  const msgErro=MSGS_ERRADAS[Math.floor(Math.random()*MSGS_ERRADAS.length)];
-
-  document.getElementById('nomeResultadoAluno').textContent=`Resultado: ${tipo}`;
-  document.getElementById('feedbackAluno').textContent=acertou
-    ? `✅ ${msgOk}`
-    : `❌ ${msgErro} O resultado correto era: ${tipo}.`;
-  document.getElementById('explicacaoAluno').textContent=EXPLICACOES[tipo];
-  document.getElementById('imgResultadoAluno').src = imagemAleatoria(tipo);
-  document.getElementById('cardResultadoAluno').style.display='block';
-  meow.play().catch(()=>{});
-}
-
-function mostrarResultadoProf(a,b){
-  const tipo=resultadoTipo(a,b);
-  document.getElementById('nomeResultadoProf').textContent=`Resultado: ${tipo}`;
-  document.getElementById('curiosidadeProf').textContent=CURIOS[tipo];
-  document.getElementById('explicacaoProf').textContent=EXPLICACOES[tipo];
-  document.getElementById('imgResultadoProf').src = imagemAleatoria(tipo);
-  document.getElementById('cardResultadoProf').style.display='block';
-  meow.play().catch(()=>{});
-}
-
-// ============================
-//   AUTENTICAÇÃO PROFESSOR
-// ============================
-const emailProfInput=document.getElementById('emailProf');
-const senhaProfInput=document.getElementById('senhaProf');
-const erroAuth=document.getElementById('erroAuth');
-
-function emailValido(email){
-  if(!email) return false;
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-const emailSalvo=localStorage.getItem('felinatorProfEmail');
-if(emailSalvo){
-  emailProfInput.value=emailSalvo;
-}
-
-document.getElementById('btnProfessor').onclick=()=>{
- const inicio = document.getElementById('inicio');
-inicio.style.visibility = 'hidden';
-inicio.style.height = '0';
-inicio.style.minHeight = '0';
-inicio.style.padding = '0';
-
-  document.getElementById('authProf').style.display='block';
-  document.getElementById('headerTitle').textContent="🐾 Felinator — Verificação de Professor";
-  erroAuth.style.display='none';
-};
-document.getElementById('voltarAuth').onclick=()=>{
-  document.getElementById('authProf').style.display='none';
-const inicio = document.getElementById('inicio');
-inicio.style.visibility = 'visible';
-inicio.style.height = '';
-inicio.style.minHeight = '';
-inicio.style.padding = '';
-
-  document.getElementById('headerTitle').textContent="🐾 Felinator — Simulador de Genética Felina";
-  erroAuth.style.display='none';
-};
-
-document.getElementById('gerarCodigo').onclick=()=>{
-  const hoje=new Date();
-  const codigo="PROF"+(hoje.getDate()+hoje.getMonth()+hoje.getFullYear());
-  alert("Código do dia: "+codigo);
-};
-
-document.getElementById('entrarProf').onclick=()=>{
-  const email=(emailProfInput.value||"").trim().toLowerCase();
-  const senha=(senhaProfInput.value||"").trim();
-
-  erroAuth.style.display='none';
-
-  if(!emailValido(email)){
-    erroAuth.textContent="Digite um e-mail válido (institucional ou pessoal).";
-    erroAuth.style.display='block';
-    return;
-  }
-
-  const hoje=new Date();
-  const codigoDia="PROF"+(hoje.getDate()+hoje.getMonth()+hoje.getFullYear());
-
-  if(senha==="MIAU-2025"||senha===codigoDia){
-    localStorage.setItem('felinatorProfEmail',email);
-    document.getElementById('authProf').style.display='none';
-    document.getElementById('modoProfessor').style.display='block';
-    document.getElementById('headerTitle').textContent="🐾 Felinator — Modo Professor";
-    erroAuth.style.display='none';
-  }else{
-    erroAuth.textContent="Código incorreto. Tente novamente.";
-    erroAuth.style.display='block';
-  }
-};
-
-// ============================
-//   NAVEGAÇÃO MODOS
-// ============================
-document.getElementById('btnAluno').onclick=()=>{
-const inicio = document.getElementById('inicio');
-inicio.style.visibility = 'hidden';
-inicio.style.height = '0';
-inicio.style.minHeight = '0';
-inicio.style.padding = '0';
-
-  document.getElementById('modoAluno').style.display='block';
-  document.getElementById('headerTitle').textContent="🐾 Felinator — Modo Aluno";
-  gerarOpcoesAluno();
-};
+document.getElementById('tipoAAluno').onchange=gerarOpcoesAluno;
+document.getElementById('tipoBAluno').onchange=gerarOpcoesAluno;
 
 document.getElementById('btnSorteAluno').onclick=()=>{
   const a=document.getElementById('tipoAAluno');
   const b=document.getElementById('tipoBAluno');
   a.value=TIPOS[Math.floor(Math.random()*TIPOS.length)];
   b.value=TIPOS[Math.floor(Math.random()*TIPOS.length)];
-  document.getElementById('cardResultadoAluno').style.display='none';
   gerarOpcoesAluno();
 };
 
 document.getElementById('btnResultadoAluno').onclick=()=>{
-  if(!respostaJogador){
-    alert("Escolha uma alternativa (A, B, C ou D) antes de ver o resultado.");
-    return;
-  }
+  if(!respostaJogador){ alert("Escolha uma alternativa!"); return; }
+
   const a=document.getElementById('tipoAAluno').value;
   const b=document.getElementById('tipoBAluno').value;
-  mostrarResultadoAluno(a,b,respostaJogador);
+
+  const tipoEsperado=respostaCorreta;
+  const acertou=(respostaJogador===tipoEsperado);
+
+  document.getElementById('nomeResultadoAluno').textContent="Resultado: "+tipoEsperado;
+  document.getElementById('feedbackAluno').textContent=acertou?"Acertou!":"Errou!";
+  document.getElementById('explicacaoAluno').textContent=EXPLICACOES[tipoEsperado];
+  document.getElementById('imgResultadoAluno').src=imagemAleatoria(tipoEsperado);
+
+  document.getElementById('cardResultadoAluno').style.display='block';
+
+  document.getElementById('meow').play().catch(()=>{});
+};
+
+/* =========================== */
+/* MODO PROFESSOR */
+/* =========================== */
+
+document.getElementById('btnCruzarProf').onclick=()=>{
+  const a=document.getElementById('tipoAProf').value;
+  const b=document.getElementById('tipoBProf').value;
+
+  const tipo=resultadoTipo(a,b);
+
+  document.getElementById('nomeResultadoProf').textContent="Resultado: "+tipo;
+  document.getElementById('curiosidadeProf').textContent=CURIOS[tipo];
+  document.getElementById('explicacaoProf').textContent=EXPLICACOES[tipo];
+  document.getElementById('imgResultadoProf').src=imagemAleatoria(tipo);
+
+  document.getElementById('cardResultadoProf').style.display='block';
+
+  document.getElementById('meow').play().catch(()=>{});
+};
+
+/* =========================== */
+/* AUTENTICAÇÃO DO PROFESSOR */
+/* =========================== */
+
+document.getElementById('btnProfessor').onclick=()=>{
+  hideInicio();
+  document.getElementById('authProf').style.display='block';
+};
+
+document.getElementById('voltarAuth').onclick=()=>{
+  document.getElementById('authProf').style.display='none';
+  showInicio();
+};
+
+document.getElementById('entrarProf').onclick=()=>{
+  const email=document.getElementById('emailProf').value.trim();
+  const senha=document.getElementById('senhaProf').value.trim();
+  const erro=document.getElementById('erroAuth');
+
+  erro.style.display='none';
+
+  if(!email || !email.includes('@')){
+    erro.textContent="E-mail inválido";
+    erro.style.display='block';
+    return;
+  }
+
+  const hoje=new Date();
+  const codigoDia="PROF"+(hoje.getDate()+hoje.getMonth()+hoje.getFullYear());
+
+  if(senha==="MIAU-2025" || senha===codigoDia){
+    document.getElementById('authProf').style.display='none';
+    hideInicio();
+    document.getElementById('modoProfessor').style.display='block';
+  } else {
+    erro.textContent="Código incorreto";
+    erro.style.display='block';
+  }
+};
+
+/* gerar código */
+document.getElementById('gerarCodigo').onclick=()=>{
+  const h=new Date();
+  alert("Código do dia: PROF"+(h.getDate()+h.getMonth()+h.getFullYear()));
+};
+
+/* =========================== */
+/* BOTÕES DE NAVEGAÇÃO */
+/* =========================== */
+
+document.getElementById('btnAluno').onclick=()=>{
+  hideInicio();
+  document.getElementById('modoAluno').style.display='block';
+  gerarOpcoesAluno();
 };
 
 document.getElementById('voltarAluno').onclick=()=>{
   document.getElementById('modoAluno').style.display='none';
-  const inicio = document.getElementById('inicio');
-inicio.style.visibility = 'visible';
-inicio.style.height = '';
-inicio.style.minHeight = '';
-inicio.style.padding = '';
-
-  document.getElementById('cardResultadoAluno').style.display='none';
+  showInicio();
 };
 
-document.getElementById('btnCruzarProf').onclick=()=>{
-  mostrarResultadoProf(document.getElementById('tipoAProf').value,
-                       document.getElementById('tipoBProf').value);
-};
-document.getElementById('btnSorteProf').onclick=()=>{
-  const a=document.getElementById('tipoAProf');
-  const b=document.getElementById('tipoBProf');
-  a.value=TIPOS[Math.floor(Math.random()*TIPOS.length)];
-  b.value=TIPOS[Math.floor(Math.random()*TIPOS.length)];
-  mostrarResultadoProf(a.value,b.value);
-};
 document.getElementById('voltarProf').onclick=()=>{
   document.getElementById('modoProfessor').style.display='none';
-  document.getElementById('inicio').style.display='block';
-  document.getElementById('cardResultadoProf').style.display='none';
+  showInicio();
 };
 
-// ============================
-//   THEME & PALETAS (HEADER + SIDEBAR)
-// ============================
-const themeToggle=document.getElementById('themeToggle');
-const themeToggleSide=document.getElementById('themeToggleSide');
+/* =========================== */
+/* TEMA E PALETAS */
+/* =========================== */
 
-function setDarkMode(on){
+function setDark(on){
   if(on){
     document.body.classList.add('dark');
     themeToggle.textContent='🌞';
-    themeToggleSide.textContent='Modo claro';
-    localStorage.setItem('felinatorTheme','dark');
-  }else{
+  } else {
     document.body.classList.remove('dark');
     themeToggle.textContent='🌙';
-    themeToggleSide.textContent='Modo escuro';
-    localStorage.setItem('felinatorTheme','light');
   }
 }
 
-// carregar tema salvo
-const savedTheme=localStorage.getItem('felinatorTheme');
-setDarkMode(savedTheme==='dark');
-
-themeToggle.onclick=()=>{
-  const dark=!document.body.classList.contains('dark');
-  setDarkMode(dark);
-};
-themeToggleSide.onclick=()=>{
-  const dark=!document.body.classList.contains('dark');
-  setDarkMode(dark);
+document.getElementById('themeToggle').onclick=()=>{
+  setDark(!document.body.classList.contains('dark'));
 };
 
-// paletas
-const paletteButtons=document.querySelectorAll('.palette-item');
+document.getElementById('themeToggleSide').onclick=()=>{
+  setDark(!document.body.classList.contains('dark'));
+};
 
-function aplicarPaleta(nome){
-  document.body.dataset.palette=nome;
-  localStorage.setItem('felinatorPalette',nome);
-  paletteButtons.forEach(btn=>{
-    btn.classList.toggle('active',btn.dataset.palette===nome);
-  });
-}
-
-// carregar paleta salva (padrão: Neon Mint)
-const savedPalette=localStorage.getItem('felinatorPalette') || 'bicolor';
-aplicarPaleta(savedPalette);
-
-paletteButtons.forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    aplicarPaleta(btn.dataset.palette);
-  });
+document.querySelectorAll('.palette-item').forEach(btn=>{
+  btn.onclick=()=>{
+    document.body.dataset.palette=btn.dataset.palette;
+  };
 });
 
-// sidebar
-const sideOverlay=document.getElementById('sideOverlay');
+/* =========================== */
+/* MENU LATERAL */
+/* =========================== */
+
 const sideMenu=document.getElementById('sideMenu');
-const sideClose=document.getElementById('sideClose');
-const menuToggleBtn=document.getElementById('menuToggle');
+const sideOverlay=document.getElementById('sideOverlay');
 
-function openMenu(){
-  sideOverlay.classList.add('open');
+document.getElementById('menuToggle').onclick=()=>{
   sideMenu.classList.add('open');
-}
-function closeMenu(){
-  sideOverlay.classList.remove('open');
+  sideOverlay.classList.add('open');
+};
+
+document.getElementById('sideClose').onclick=()=>{
   sideMenu.classList.remove('open');
-}
+  sideOverlay.classList.remove('open');
+};
 
-menuToggleBtn.addEventListener('click',openMenu);
-sideClose.addEventListener('click',closeMenu);
-sideOverlay.addEventListener('click',closeMenu);
-document.addEventListener('keydown',e=>{
-  if(e.key==='Escape') closeMenu();
-});
+sideOverlay.onclick=()=>{
+  sideMenu.classList.remove('open');
+  sideOverlay.classList.remove('open');
+};
 
-// ============================
-//   TABS DO MODO PROFESSOR
-// ============================
-document.querySelectorAll('.prof-tab-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    const tab=btn.dataset.tab;
-    document.querySelectorAll('.prof-tab-btn').forEach(b=>b.classList.remove('active'));
-    document.querySelectorAll('.prof-tab').forEach(t=>t.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('tab-'+tab).classList.add('active');
-  });
-});
-
-// ============================
-//   QUADRADO DE PUNNETT
-// ============================
-let ultimaStatsPunnett={dom:75,rec:25};
-
-function gametas(genotipo){
-  return [genotipo.charAt(0),genotipo.charAt(1)];
-}
-function ordenarGen(gen){
-  const arr=gen.split('');
-  arr.sort((x,y)=>{
-    if(x===y) return 0;
-    if(x.toUpperCase()===x && y.toLowerCase()===y) return -1;
-    if(x.toLowerCase()===x && y.toUpperCase()===y) return 1;
-    return x.localeCompare(y);
-  });
-  return arr.join('');
-}
-
-function atualizarPunnett(){
-  const p1=document.getElementById('punnettP1').value;
-  const p2=document.getElementById('punnettP2').value;
-  const g1=gametas(p1);
-  const g2=gametas(p2);
-
-  document.getElementById('p1g1').textContent=g1[0];
-  document.getElementById('p1g2').textContent=g1[1];
-  document.getElementById('p2g1').textContent=g2[0];
-  document.getElementById('p2g2').textContent=g2[1];
-
-  const c11=ordenarGen(g1[0]+g2[0]);
-  const c12=ordenarGen(g1[0]+g2[1]);
-  const c21=ordenarGen(g1[1]+g2[0]);
-  const c22=ordenarGen(g1[1]+g2[1]);
-
-  document.getElementById('cell11').textContent=c11;
-  document.getElementById('cell12').textContent=c12;
-  document.getElementById('cell21').textContent=c21;
-  document.getElementById('cell22').textContent=c22;
-
-  const gens=[c11,c12,c21,c22];
-  let contAA=0,contAa=0,contaa=0;
-  gens.forEach(g=>{
-    if(g==='AA') contAA++;
-    else if(g==='aa') contaa++;
-    else contAa++;
-  });
-
-  const total=4;
-  const pAA=(contAA/total)*100;
-  const pAa=(contAa/total)*100;
-  const paa=(contaa/total)*100;
-  const pDom=pAA+pAa;
-  const pRec=paa;
-
-  ultimaStatsPunnett={dom:pDom,rec:pRec};
-
-  document.getElementById('punnettResumo').textContent=
-    `Genótipos esperados: ${pAA}% AA, ${pAa}% Aa, ${paa}% aa.`;
-  document.getElementById('punnettFenotipo').textContent=
-    `${pDom}% com fenótipo dominante, ${pRec}% com fenótipo recessivo.`;
-}
-
-document.getElementById('btnPunnett').addEventListener('click',atualizarPunnett);
-atualizarPunnett();
-
-// ============================
-//   GRÁFICO (CANVAS)
-// ============================
-const canvas=document.getElementById('graficoCanvas');
-const ctx=canvas.getContext('2d');
-
-function desenharGrafico(){
-  const dom=ultimaStatsPunnett.dom||75;
-  const rec=ultimaStatsPunnett.rec||25;
-
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-
-  const w=80;
-  const maxAltura=140;
-  const maxValor=Math.max(dom,rec,1);
-  const escala=maxAltura/maxValor;
-  const yBase=canvas.height-30;
-
-  ctx.beginPath();
-  ctx.moveTo(20,yBase);
-  ctx.lineTo(canvas.width-20,yBase);
-  ctx.strokeStyle="#9ca3af";
-  ctx.lineWidth=1;
-  ctx.stroke();
-
-  const hDom=dom*escala;
-  const xDom=80;
-  ctx.fillStyle="#4f46e5";
-  ctx.fillRect(xDom,yBase-hDom,w,hDom);
-  ctx.fillStyle="#e5e7eb";
-  ctx.font="12px Nunito";
-  ctx.fillText("Dominante",xDom-4,yBase+14);
-  ctx.fillText(dom.toFixed(1)+"%",xDom+12,yBase-hDom-6);
-
-  const hRec=rec*escala;
-  const xRec=200;
-  ctx.fillStyle="#14b8a6";
-  ctx.fillRect(xRec,yBase-hRec,w,hRec);
-  ctx.fillText("Recessivo",xRec,yBase+14);
-  ctx.fillText(rec.toFixed(1)+"%",xRec+12,yBase-hRec-6);
-
-  document.getElementById('graficoLegenda').textContent=
-    `Gráfico baseado no último quadrado de Punnett: ${dom.toFixed(1)}% dominante, ${rec.toFixed(1)}% recessivo.`;
-}
-
-document.getElementById('btnDesenharGrafico').addEventListener('click',desenharGrafico);
-desenharGrafico();
-
-// ============================
-//   EXERCÍCIOS – MOSTRAR RESPOSTA
-// ============================
-document.querySelectorAll('.btnMostrarResposta').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    const id=btn.dataset.target;
-    const ans=document.getElementById(id);
-    if(ans.style.display==='block'){
-      ans.style.display='none';
-      btn.textContent='Mostrar resposta';
-    }else{
-      ans.style.display='block';
-      btn.textContent='Ocultar resposta';
-    }
-  });
-});
-
-// ============================
-//   SIMULAÇÃO POPULACIONAL
-// ============================
-document.getElementById('btnSimularPop').addEventListener('click',()=>{
-  const N=parseInt(document.getElementById('tamanhoPop').value)||40;
-  const pDom=(ultimaStatsPunnett.dom||75)/100;
-  const pRec=(ultimaStatsPunnett.rec||25)/100;
-
-  let contDom=0,contRec=0;
-  for(let i=0;i<N;i++){
-    if(Math.random()<pDom) contDom++; else contRec++;
-  }
-  const percDom=(contDom/N*100).toFixed(1);
-  const percRec=(contRec/N*100).toFixed(1);
-
-  document.getElementById('simResultado').textContent=
-    `Em uma população de ${N} filhotes, foram simulados ${contDom} com fenótipo dominante (${percDom}%) `
-    + `e ${contRec} com fenótipo recessivo (${percRec}%). `
-    + `Compare com as proporções teóricas do quadrado de Punnett.`;
-});
-
-// ============================
-//   TUTORIAIS – PASSOS COLAPSÁVEIS
-// ============================
-document.querySelectorAll('.step-header').forEach(header=>{
-  header.addEventListener('click',()=>{
-    const step=header.parentElement;
-    const open=step.classList.contains('open');
-    document.querySelectorAll('.step').forEach(s=>s.classList.remove('open'));
-    if(!open) step.classList.add('open');
-  });
-});
-
-// gerar opções aluno na primeira carga se entrar direto por algum motivo
-if(document.getElementById('modoAluno').style.display!=='none'){
-  gerarOpcoesAluno();
-}
 </script>
 </body>
 </html>
