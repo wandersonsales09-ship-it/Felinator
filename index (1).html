@@ -256,6 +256,18 @@ header{
 .header-actions{
   display:flex;align-items:center;gap:8px;
 }
+.header-logo img {
+  height: 100px; /* AQUI VOCÊ AJUSTA O TAMANHO */
+  width: auto;
+  display: block;
+}
+.header-title{
+  flex:1;
+  text-align:center;
+  font-size:16px;
+  font-weight:700;
+  color:inherit;
+}
 .container{max-width:1000px;margin:0 auto;padding:20px}
 .card{
   background:var(--card-light);border-radius:20px;
@@ -722,7 +734,6 @@ body.dark .hero-main-card{
   background:var(--chip-bg-light);
   border:1px solid rgba(148,163,184,.4);
 }
-.hero-chip span.emoji{font-size:16px}
 body.dark .hero-chip{
   background:var(--chip-bg-dark);
   color:#E5E7EB;
@@ -1073,12 +1084,6 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
   font-weight: 600;
 }
 
-.header-logo img {
-  height: 100px; /* AQUI VOCÊ AJUSTA O TAMANHO */
-  width: auto;
-  display: block;
-}
-
 @media (max-width: 480px) {
   .header-logo img {
     height: 80px; /* versão mobile */
@@ -1099,39 +1104,6 @@ body.dark .voltar{background:#374151;color:#e5e7eb}
     border-radius: 12px;
     object-fit: cover;
 } 
-
-  /* --- Correção HERO: impedir bloqueio de clique --- */
-
-/* Garante que a Hero nunca bloqueie cliques nos botões */
-#inicio::before,
-#inicio::after {
-    pointer-events: none !important;
-}
-
-/* Caso tenha sido adicionada alguma imagem de fundo futurista */
-#inicio img,
-.hero-img-futurista {
-    pointer-events: none !important;
-}
-
-/* Garante que o conteúdo principal da Hero sempre fique clicável */
-.hero-main-card, 
-.hero-col-left, 
-.hero-col-right,
-.mode-card,
-button,
-.mode-text-block {
-    position: relative;
-    z-index: 20 !important;
-    pointer-events: auto !important;
-}
-
-/* Garante que qualquer camada decorativa fique atrás */
-#inicio {
-    position: relative;
-    z-index: 1;
-}
-
 </style>
 </head>
 <body data-palette="bicolor">
@@ -1139,6 +1111,8 @@ button,
   <div class="header-logo">
     <img src="img/Logo-Felinator.svg" alt="Logo Felinator">
   </div>
+
+  <div class="header-title" id="headerTitle">🐾 Felinator 1.0 — Simulador de Genética Felina</div>
 
   <div class="header-actions">
     <button id="themeToggle" class="theme-toggle" title="Alternar tema">🌙</button>
@@ -1853,8 +1827,8 @@ const IMG = {
      ===================================================== */
 
   'Bicolor': [
-    'img/gato-bicolor-1.jpg'
-    'img/gato-bicolor-2.jpg'// TEMPORÁRIO
+    'img/gato-bicolor-1.jpg',
+    'img/gato-bicolor-2.jpg' // TEMPORÁRIO
   ],
 
   'Point': [
@@ -2257,7 +2231,11 @@ document.getElementById('btnSorteProf').onclick=()=>{
 };
 document.getElementById('voltarProf').onclick=()=>{
   document.getElementById('modoProfessor').style.display='none';
-  document.getElementById('inicio').style.display='block';
+  const inicio = document.getElementById('inicio');
+  inicio.style.visibility = 'visible';
+  inicio.style.height = '';
+  inicio.style.minHeight = '';
+  inicio.style.padding = '';
   document.getElementById('cardResultadoProf').style.display='none';
 };
 
@@ -2277,6 +2255,7 @@ function setDarkMode(on){
     document.body.classList.remove('dark');
     themeToggle.textContent='🌙';
     themeToggleSide.textContent='Modo escuro';
+    localStorage.setItem('felinatorPalette','light');
     localStorage.setItem('felinatorTheme','light');
   }
 }
